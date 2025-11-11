@@ -1,0 +1,11 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image: golang:1.23
+  before_script:
+    - 'printf "machine github.com\nlogin %s\npassword %s\n" "$GITHUB_USERNAME" "$GITHUB_TOKEN" > ~/.netrc'
+    - chmod 600 ~/.netrc
+  script:
+    - go build ./...

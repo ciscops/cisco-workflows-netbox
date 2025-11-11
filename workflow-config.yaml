@@ -1,0 +1,39 @@
+defaults:
+  query_params:
+    - q
+    - name
+    - id
+    - description
+    - limit
+    - status
+    - tenant
+workflows:
+  - endpoint: /dcim/devices
+    query_params:
+      - site
+      - has_primary_ip
+    options:
+      category_id: category_02SwHL6MlMREsr8ryQRwyPYqEHI8m8see7i
+      category_name: NetBox
+      support_idempotency: false
+
+  # - endpoint: /dcim/devices/{id}
+  #   methods: [GET, DELETE]
+  #   options:
+  #     platform: Netbox
+  #     support_idempotency: true
+  #     idempotency_condition: "404"
+
+  - endpoint: /dcim/interfaces
+    query_params: [q, device_id, tag]
+    # methods omitted -> generates all available methods on that endpoint
+  - endpoint: /ipam/aggregates
+  - endpoint: /ipam/prefixes
+    query_params:
+      - contains
+      - within
+      - prefix
+      - site
+      - vlan_id
+      - vrf
+  - endpoint: /ipam/prefixes/{id}/available-prefixes

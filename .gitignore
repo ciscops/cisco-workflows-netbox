@@ -1,0 +1,30 @@
+# Local tool caches and GOPATH mirror
+.gopath/
+.cache/
+.cache-go/
+
+# Build artifacts
+bin/
+ao-atomic-generator
+generate_workflow
+outputs/
+
+# Go compiler/test outputs
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.a
+coverage.*
+go.work
+go.work.sum
+
+# Editor settings
+.vscode/
+.idea/
+
+# macOS metadata
+.DS_Store

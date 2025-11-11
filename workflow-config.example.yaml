@@ -1,0 +1,28 @@
+defaults:
+  query_params:
+    - q
+    - id
+    - site_id
+
+workflows:
+  - endpoint: /dcim/devices
+    methods: [GET]
+    query_params:
+      - name
+      - status
+      - has_primary_ip
+    options:
+      category_id: category_02SwHL6MlMREsr8ryQRwyPYqEHI8m8see7i
+      category_name: NetBox
+      support_idempotency: false
+
+  - endpoint: /dcim/devices/{id}
+    methods: [GET, DELETE]
+    options:
+      platform: Netbox
+      support_idempotency: true
+      idempotency_condition: "404"
+
+  - endpoint: /dcim/interfaces
+    query_params: [device_id, tag]
+    # methods omitted -> generates all available methods on that endpoint
