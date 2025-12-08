@@ -123,7 +123,7 @@ type NetboxAPIRequestProperties struct {
 	RuntimeUser       RuntimeUserData `json:"runtime_user"`
 	SkipExecution     bool            `json:"skip_execution"`
 	Target            map[string]bool `json:"target"`
-	Body              string          `json:"body,omitempty"`
+	Body              string          `json:"_body,omitempty"`
 }
 
 type LogicIfElseProperties struct {
@@ -180,7 +180,12 @@ type CategoryData struct {
 }
 
 type OpenAPISpec struct {
-	Paths map[string]PathItem `json:"paths"`
+	Paths      map[string]PathItem `json:"paths"`
+	Components Components          `json:"components"`
+}
+
+type Components struct {
+	Schemas map[string]Schema `json:"schemas"`
 }
 
 type PathItem struct {
@@ -224,6 +229,7 @@ type Response struct {
 }
 
 type Schema struct {
+	Ref         string            `json:"$ref,omitempty"`
 	Type        string            `json:"type"`
 	Properties  map[string]Schema `json:"properties,omitempty"`
 	Items       *Schema           `json:"items,omitempty"`
@@ -501,6 +507,107 @@ func ExtractOperation(openAPISpec OpenAPISpec, operationId string) (*Operation, 
 	return nil, "", "", fmt.Errorf("operationId %s not found", operationId)
 }
 
+func resolveOperationSchemas(openAPISpec OpenAPISpec, operation *Operation) {
+	if operation == nil {
+		return
+	}
+	for idx, param := range operation.Parameters {
+		operation.Parameters[idx].Schema = resolveSchemaRefs(openAPISpec, param.Schema)
+	}
+	operation.RequestBody.Content.ApplicationJSON.Schema = resolveSchemaRefs(openAPISpec, operation.RequestBody.Content.ApplicationJSON.Schema)
+	for code, response := range operation.Responses {
+		responseSchema := resolveSchemaRefs(openAPISpec, response.Content.ApplicationJSON.Schema)
+		response.Content.ApplicationJSON.Schema = responseSchema
+		operation.Responses[code] = response
+	}
+}
+
+func resolveSchemaRefs(openAPISpec OpenAPISpec, schema Schema) Schema {
+	return resolveSchemaRefsWithHistory(openAPISpec, schema, map[string]bool{})
+}
+
+func resolveSchemaRefsWithHistory(openAPISpec OpenAPISpec, schema Schema, history map[string]bool) Schema {
+	if schema.Ref != "" {
+		refName := extractSchemaRefName(schema.Ref)
+		if refName != "" {
+			if history[refName] {
+				return schema
+			}
+			history[refName] = true
+			if resolved, ok := openAPISpec.Components.Schemas[refName]; ok {
+				resolved = resolveSchemaRefsWithHistory(openAPISpec, resolved, history)
+				delete(history, refName)
+				return resolved
+			}
+			delete(history, refName)
+		}
+	}
+	if schema.Items != nil {
+		resolvedItems := resolveSchemaRefsWithHistory(openAPISpec, *schema.Items, history)
+		schema.Items = &resolvedItems
+	}
+	if len(schema.Properties) > 0 {
+		for key, propSchema := range schema.Properties {
+			resolvedProp := resolveSchemaRefsWithHistory(openAPISpec, propSchema, history)
+			schema.Properties[key] = resolvedProp
+		}
+	}
+	return schema
+}
+
+func extractSchemaRefName(ref string) string {
+	if ref == "" {
+		return ""
+	}
+	parts := strings.Split(ref, "/")
+	return parts[len(parts)-1]
+}
+
+func applyOperationSchemaOverrides(operationId string, operation *Operation) {
+	if operation == nil {
+		return
+	}
+	switch operationId {
+	case "ipam_prefixes_available_prefixes_create":
+		applyAvailablePrefixOverrides(operation)
+	}
+}
+
+func applyAvailablePrefixOverrides(operation *Operation) {
+	bodySchema := &operation.RequestBody.Content.ApplicationJSON.Schema
+	if bodySchema.Type != "array" || bodySchema.Items == nil {
+		return
+	}
+	itemSchema := bodySchema.Items
+	if itemSchema.Type == "" {
+		itemSchema.Type = "object"
+	}
+	if itemSchema.Properties == nil {
+		itemSchema.Properties = make(map[string]Schema)
+	}
+	if _, exists := itemSchema.Properties["prefix_length"]; !exists {
+		itemSchema.Properties["prefix_length"] = Schema{
+			Type:        "integer",
+			Description: "Desired prefix length (mask) to allocate under the selected parent prefix.",
+		}
+	}
+	itemSchema.Required = removeString(itemSchema.Required, "prefix")
+}
+
+func removeString(list []string, target string) []string {
+	if len(list) == 0 {
+		return list
+	}
+	result := list[:0]
+	for _, v := range list {
+		if v == target {
+			continue
+		}
+		result = append(result, v)
+	}
+	return result
+}
+
 // HumanReadableName converts a camelCase or PascalCase string to a more readable format.
 var whitespaceRegex = regexp.MustCompile(`\s+`)
 
@@ -644,26 +751,65 @@ func contains(slice []string, value string) bool {
 
 // GenerateAPIRequestBody constructs the API request body as a JSON object with placeholders.
 func GenerateAPIRequestBody(schema Schema) string {
-	bodyProps := make(map[string]string)
-	for propName, propSchema := range schema.Properties {
-
-		placeholder := fmt.Sprintf("$workflow.definition_workflow_$WorkflowKSUID.input.variable_workflow_$%sKSUID$", propName)
-		if propSchema.Type == "array" {
-			bodyProps[propName] = placeholder // No quotes for arrays
-		} else if propSchema.Type == "object" {
-			bodyProps[propName] = placeholder // No quotes for arrays
-		} else {
-			bodyProps[propName] = fmt.Sprintf("\"%s\"", placeholder) // Quotes for non-array types
+	switch schema.Type {
+	case "object":
+		return buildObjectRequestBody(schema)
+	case "array":
+		if schema.Items == nil {
+			return "[]"
 		}
+		itemBody := GenerateAPIRequestBody(*schema.Items)
+		return "[\n" + indentMultilineString(itemBody, "\t") + "\n]"
+	default:
+		return "{\n\t\n}"
 	}
+}
 
-	// Manually construct JSON without double escaping
-	parts := []string{}
-	for key, value := range bodyProps {
-		parts = append(parts, fmt.Sprintf("\"%s\":%s", key, value))
+func buildObjectRequestBody(schema Schema) string {
+	if len(schema.Properties) == 0 {
+		return "{\n\t\n}"
 	}
-	apiBody := "{\n\t" + strings.Join(parts, ",\n\t") + "\n}"
-	return apiBody
+	keys := sortedSchemaKeys(schema.Properties)
+	parts := make([]string, len(keys))
+	for i, key := range keys {
+		propSchema := schema.Properties[key]
+		placeholder := fmt.Sprintf("$workflow.definition_workflow_$WorkflowKSUID.input.variable_workflow_$%sKSUID$", key)
+		var value string
+		switch propSchema.Type {
+		case "array", "object":
+			value = placeholder
+		case "integer", "number", "boolean":
+			if stringifyBodyInputs {
+				value = fmt.Sprintf("\"%s\"", placeholder)
+			} else {
+				value = placeholder
+			}
+		default:
+			value = fmt.Sprintf("\"%s\"", placeholder)
+		}
+		parts[i] = fmt.Sprintf("\"%s\":%s", key, value)
+	}
+	return "{\n\t" + strings.Join(parts, ",\n\t") + "\n}"
+}
+
+func indentMultilineString(input, indent string) string {
+	if input == "" {
+		return indent
+	}
+	lines := strings.Split(input, "\n")
+	for i, line := range lines {
+		lines[i] = indent + line
+	}
+	return strings.Join(lines, "\n")
+}
+
+func sortedSchemaKeys(props map[string]Schema) []string {
+	keys := make([]string, 0, len(props))
+	for key := range props {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	return keys
 }
 
 func jsonEscape(i string) string {
@@ -774,6 +920,7 @@ type WorkflowConfig struct {
 	Endpoint    string           `json:"endpoint" yaml:"endpoint"`
 	Methods     []string         `json:"methods,omitempty" yaml:"methods,omitempty"`
 	QueryParams []string         `json:"query_params,omitempty" yaml:"query_params,omitempty"`
+	BodyParams  []string         `json:"body_params,omitempty" yaml:"body_params,omitempty"`
 	Options     *WorkflowOptions `json:"options,omitempty" yaml:"options,omitempty"`
 }
 
@@ -795,6 +942,8 @@ type workflowConfigFile struct {
 }
 
 var nonIdentifierRegex = regexp.MustCompile(`[^a-zA-Z0-9_]`)
+var bodyParamFilter = make(map[string]map[string]struct{})
+var stringifyBodyInputs bool
 
 func pythonIdentifier(name string, fallback string, idx int) string {
 	if name == "" {
@@ -975,17 +1124,71 @@ func getQueryParamAllowSet(operationId string) map[string]struct{} {
 	return set
 }
 
-func ensureNetboxPagination(schema *Schema) {
-	if schema.Properties == nil {
-		schema.Properties = make(map[string]Schema)
+func setBodyParamFilter(operationId string, params []string) {
+	operationId = strings.TrimSpace(operationId)
+	if operationId == "" {
+		return
 	}
-	if schema.Type == "" {
-		schema.Type = "object"
-	}
-	for key, def := range netboxPaginationSchema {
-		if _, exists := schema.Properties[key]; !exists {
-			schema.Properties[key] = def
+	cleaned := make(map[string]struct{})
+	for _, param := range params {
+		param = strings.TrimSpace(param)
+		if param == "" {
+			continue
 		}
+		cleaned[param] = struct{}{}
+	}
+	if len(cleaned) == 0 {
+		delete(bodyParamFilter, operationId)
+		return
+	}
+	bodyParamFilter[operationId] = cleaned
+}
+
+func getBodyParamAllowSet(operationId string) map[string]struct{} {
+	if len(bodyParamFilter) == 0 {
+		return nil
+	}
+	return bodyParamFilter[operationId]
+}
+
+func applyBodyParamFilter(operationId string, schema *Schema) {
+	if schema == nil {
+		return
+	}
+	allowed := getBodyParamAllowSet(operationId)
+	if allowed == nil || len(allowed) == 0 {
+		return
+	}
+	filterSchemaProperties(schema, allowed)
+}
+
+func filterSchemaProperties(schema *Schema, allowed map[string]struct{}) {
+	if schema == nil {
+		return
+	}
+	if schema.Type == "object" {
+		if len(schema.Properties) > 0 {
+			for key, prop := range schema.Properties {
+				if _, ok := allowed[key]; !ok {
+					delete(schema.Properties, key)
+					continue
+				}
+				filterSchemaProperties(&prop, allowed)
+				schema.Properties[key] = prop
+			}
+		}
+		if len(schema.Required) > 0 {
+			var filtered []string
+			for _, req := range schema.Required {
+				if _, ok := allowed[req]; ok {
+					filtered = append(filtered, req)
+				}
+			}
+			schema.Required = filtered
+		}
+	}
+	if schema.Type == "array" && schema.Items != nil {
+		filterSchemaProperties(schema.Items, allowed)
 	}
 }
 
@@ -993,6 +1196,12 @@ func renderWorkflow(openAPISpec OpenAPISpec, operationId string) (string, error)
 	operation, path, method, err := ExtractOperation(openAPISpec, operationId)
 	if err != nil {
 		return "", err
+	}
+	resolveOperationSchemas(openAPISpec, operation)
+	applyOperationSchemaOverrides(operationId, operation)
+	schema := &operation.RequestBody.Content.ApplicationJSON.Schema
+	if schema != nil && (schema.Type != "" || len(schema.Properties) > 0 || schema.Items != nil) {
+		applyBodyParamFilter(operationId, schema)
 	}
 
 	workflowData := GenerateWorkflowData(operation, path, method)
@@ -1105,6 +1314,20 @@ func generateFromConfig(openAPISpec OpenAPISpec, configPath, outputDir string) e
 					queryParamFilter[operationId] = combinedParams
 				}
 			}
+			var (
+				appliedBodyFilter   bool
+				previousBodyFilters map[string]struct{}
+			)
+			if strings.EqualFold(method, "POST") && len(wf.BodyParams) > 0 {
+				cleanBodyParams := ensureBodyParamList(wf.BodyParams)
+				if len(cleanBodyParams) > 0 {
+					if existing, ok := bodyParamFilter[operationId]; ok {
+						previousBodyFilters = existing
+					}
+					setBodyParamFilter(operationId, cleanBodyParams)
+					appliedBodyFilter = true
+				}
+			}
 
 			savedSupport := supportIdempotency
 			savedCond := idempotencyCondition
@@ -1139,6 +1362,13 @@ func generateFromConfig(openAPISpec OpenAPISpec, configPath, outputDir string) e
 
 			if err != nil {
 				return err
+			}
+			if appliedBodyFilter {
+				if previousBodyFilters != nil {
+					bodyParamFilter[operationId] = previousBodyFilters
+				} else {
+					delete(bodyParamFilter, operationId)
+				}
 			}
 
 			filename := fmt.Sprintf("%s.json", operationId)
@@ -1223,6 +1453,126 @@ func ensureQueryParamList(list []string) []string {
 	}
 	sort.Strings(result)
 	return result
+}
+
+func ensureBodyParamList(list []string) []string {
+	set := make(map[string]struct{})
+	for _, v := range list {
+		v = strings.TrimSpace(v)
+		if v == "" {
+			continue
+		}
+		set[v] = struct{}{}
+	}
+	if len(set) == 0 {
+		return nil
+	}
+	result := make([]string, 0, len(set))
+	for v := range set {
+		result = append(result, v)
+	}
+	sort.Strings(result)
+	return result
+}
+
+func ensureNetboxPagination(schema *Schema) {
+	if schema.Properties == nil {
+		schema.Properties = make(map[string]Schema)
+	}
+	if schema.Type == "" {
+		schema.Type = "object"
+	}
+	for key, def := range netboxPaginationSchema {
+		if _, exists := schema.Properties[key]; !exists {
+			schema.Properties[key] = def
+		}
+	}
+}
+
+func appendRequestBodyObjectVariables(variables []VariableData, schema Schema) []VariableData {
+	if len(schema.Properties) == 0 {
+		return variables
+	}
+	propKeys := sortedSchemaKeys(schema.Properties)
+	for _, propName := range propKeys {
+		propSchema := schema.Properties[propName]
+		isRequired := contains(schema.Required, propName)
+		variable := buildRequestBodyVariable(propName, propSchema, isRequired)
+		variables = append(variables, variable)
+	}
+	return variables
+}
+
+func buildRequestBodyVariable(propName string, propSchema Schema, isRequired bool) VariableData {
+	name := "Input - " + HumanReadableName(propName)
+	descriptionPostFix := ""
+	if propSchema.Type == "string" && len(propSchema.Enum) > 0 {
+		enumValues := make([]string, len(propSchema.Enum))
+		for i, val := range propSchema.Enum {
+			enumValues[i] = fmt.Sprint(val)
+		}
+		descriptionPostFix = " Valid options are: " + strings.Join(enumValues, ", ") + "."
+	}
+
+	schemaId := "datatype.string"
+	varType := "datatype.string"
+	varValue := interface{}("")
+	variableStringFormat := "text"
+
+	originalType := propSchema.Type
+	switch propSchema.Type {
+	case "integer", "number":
+		schemaId = "datatype.integer"
+		varType = "datatype.integer"
+		varValue = 0
+	case "boolean":
+		schemaId = "datatype.boolean"
+		varType = "datatype.boolean"
+		varValue = false
+	case "array":
+		schemaId = "datatype.string"
+		varType = "datatype.string"
+		varValue = []interface{}{}
+		variableStringFormat = "json"
+	case "object":
+		schemaId = "datatype.string"
+		varType = "datatype.string"
+		varValue = map[string]interface{}{}
+		variableStringFormat = "json"
+	}
+	if stringifyBodyInputs && (originalType == "integer" || originalType == "number" || originalType == "boolean") {
+		schemaId = "datatype.string"
+		varType = "datatype.string"
+		varValue = ""
+		variableStringFormat = "text"
+	}
+
+	return VariableData{
+		SchemaID: schemaId,
+		Properties: VariableProperties{
+			Scope:                "input",
+			Name:                 name,
+			Type:                 varType,
+			Description:          propSchema.Description + descriptionPostFix,
+			IsRequired:           isRequired,
+			Value:                varValue,
+			VariableStringFormat: variableStringFormat,
+			DisplayOnWizard:      true,
+			IsInvisible:          false,
+		},
+		UniqueName: "variable_workflow_$" + propName + "KSUID",
+		ObjectType: "variable_workflow",
+	}
+}
+
+func schemaHasRequestBody(schema Schema) bool {
+	if schema.Type == "object" && len(schema.Properties) > 0 {
+		return true
+	}
+	if schema.Type == "array" && schema.Items != nil && schema.Items.Type == "object" && len(schema.Items.Properties) > 0 {
+		return true
+	}
+	return false
 }
 
 // GenerateWorkflowData generates the workflow data structure from the OpenAPI spec operation.
@@ -1346,80 +1696,13 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 		variables = append(variables, IdempotancyInput)
 	}
 
-	requiredProps := operation.RequestBody.Content.ApplicationJSON.Schema.Required
-
-	// Add request body properties as input variables
-	if operation.RequestBody.Content.ApplicationJSON.Schema.Type == "object" {
-		for propName, propSchema := range operation.RequestBody.Content.ApplicationJSON.Schema.Properties {
-			name := "Input - " + HumanReadableName(propName)
-			descriptionPostFix := ""
-			if propSchema.Type == "string" && len(propSchema.Enum) > 0 {
-				enumStArr := make([]string, len(propSchema.Enum))
-				for i, val := range propSchema.Enum {
-					enumStArr[i] = fmt.Sprint(val)
-				}
-				descriptionPostFix = " Valid options are: " + strings.Join(enumStArr, ", ") + "."
-			}
-			var varType string
-			var varValue interface{}
-			var variableStringFormat string
-			var schemaId string
-
-			switch propSchema.Type {
-			case "string":
-				schemaId = "datatype.string"
-				varType = "datatype.string"
-				varValue = ""
-				variableStringFormat = "text"
-			case "integer", "number":
-				schemaId = "datatype.integer"
-				varType = "datatype.integer"
-				varValue = 0
-				variableStringFormat = ""
-			case "array":
-				if propSchema.Items.Type == "object" {
-					schemaId = "datatype.string"
-					varType = "datatype.string"
-				} else {
-					schemaId = "variable_type_array_01JhSTW61I3ZU2IfL7dwQox83eFDzE1qUiA"
-					varType = "datatype.array"
-					varValue = []interface{}{}
-				}
-				varValue = []interface{}{}
-				variableStringFormat = "json"
-			case "object":
-				schemaId = "datatype.string"
-				varType = "datatype.string"
-				varValue = map[string]interface{}{}
-				variableStringFormat = "json"
-			case "boolean":
-				schemaId = "datatype.boolean"
-				varType = "datatype.boolean"
-				varValue = false
-				variableStringFormat = "text"
-			default:
-				schemaId = "datatype.string"
-				varType = "datatype.string"
-				varValue = ""
-				variableStringFormat = "text"
-			}
-
-			variables = append(variables, VariableData{
-				SchemaID: schemaId,
-				Properties: VariableProperties{
-					Scope:                "input",
-					Name:                 name,
-					Type:                 varType,
-					Description:          propSchema.Description + descriptionPostFix,
-					IsRequired:           contains(requiredProps, propName),
-					Value:                varValue,
-					VariableStringFormat: variableStringFormat,
-					DisplayOnWizard:      true,
-					IsInvisible:          false,
-				},
-				UniqueName: "variable_workflow_$" + propName + "KSUID",
-				ObjectType: "variable_workflow",
-			})
+	bodySchema := operation.RequestBody.Content.ApplicationJSON.Schema
+	switch bodySchema.Type {
+	case "object":
+		variables = appendRequestBodyObjectVariables(variables, bodySchema)
+	case "array":
+		if bodySchema.Items != nil && bodySchema.Items.Type == "object" {
+			variables = appendRequestBodyObjectVariables(variables, *bodySchema.Items)
 		}
 	}
 
@@ -1477,8 +1760,7 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 		}
 	}
 
-	hasRequestBody := operation.RequestBody.Content.ApplicationJSON.Schema.Type == "object" &&
-		len(operation.RequestBody.Content.ApplicationJSON.Schema.Properties) > 0
+	hasRequestBody := schemaHasRequestBody(bodySchema)
 
 	needsQueryPrep := currentConnector.ActionType == "netbox.invoke_api" && strings.EqualFold(method, "GET") && len(queryParams) > 0
 	var queryReference string
@@ -2018,6 +2300,7 @@ func main() {
 	platformNamePtr := flag.String("platform", "", "Optional platform prefix for names and titles (e.g., 'Meraki')")
 	connectorTypePtr := flag.String("connector", "meraki", "Connector to target (meraki|netbox).")
 	queryParamConfigPtr := flag.String("queryParamsConfig", "", "Optional path to a YAML/JSON file mapping operationIds to allowed query parameters.")
+	stringifyBodyInputsPtr := flag.Bool("stringifyBodyInputs", false, "Coerce request body inputs to strings before serialization.")
 	configFilePtr := flag.String("config", "", "Path to YAML/JSON file describing workflows to generate.")
 	outputDirPtr := flag.String("outputDir", "outputs", "Directory to write generated workflows when using -config.")
 	flag.Parse()
@@ -2029,6 +2312,7 @@ func main() {
 	categoryName = *categoryNamePtr
 	platformName = *platformNamePtr
 	connectorType := strings.ToLower(strings.TrimSpace(*connectorTypePtr))
+	stringifyBodyInputs = *stringifyBodyInputsPtr
 	var err error
 	currentConnector, err = getConnectorConfig(connectorType)
 	if err != nil {

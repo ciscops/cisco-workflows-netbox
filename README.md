@@ -54,4 +54,24 @@ To generate a workflow, use the `go run` command with the necessary flags:
     	the Category Name to put the atomic under.
   -platform string
     	Optional platform prefix for names and titles (e.g., 'Meraki').
+  -stringifyBodyInputs
+        Force request-body inputs to be treated as strings (workaround for connectors that reject numeric/bool JSON values).
+```
+
+## Workflow config
+
+When using the `-config` flag, each workflow entry in `workflow-config.yaml` can fine-tune the generated inputs:
+
+- `query_params` limits which query-string arguments surface in the wizard (others from the spec are ignored).
+- `body_params` (POST/PUT) lists the request-body properties you want to expose as wizard inputs. Only those keys are preserved in the generated payload, so you can keep large schemas focused on the fields AO users actually fill in.
+
+Example:
+
+```yaml
+- endpoint: /ipam/prefixes/{id}/available-prefixes
+  methods: [POST]
+  body_params:
+    - prefix_length
+    - description
+    - status
 ```

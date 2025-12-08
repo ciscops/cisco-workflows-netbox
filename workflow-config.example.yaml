@@ -26,3 +26,9 @@ workflows:
   - endpoint: /dcim/interfaces
     query_params: [device_id, tag]
     # methods omitted -> generates all available methods on that endpoint
+  - endpoint: /ipam/prefixes/{id}/available-prefixes
+    methods: [POST]
+    body_params:
+      - prefix_length
+      - description
+      - status

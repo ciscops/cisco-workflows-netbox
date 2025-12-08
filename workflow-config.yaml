@@ -37,3 +37,9 @@ workflows:
       - vlan_id
       - vrf
   - endpoint: /ipam/prefixes/{id}/available-prefixes
+    body_params:
+      - status
+      - description
+      - prefix_length
+  - endpoint: /ipam/ip-addresses
+  - endpoint: /ipam/ip-addresses/{id}
