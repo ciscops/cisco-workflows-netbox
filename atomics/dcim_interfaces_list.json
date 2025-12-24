@@ -1,6 +1,6 @@
 {
   "workflow": {
-    "unique_name": "definition_workflow_36JETSCHFaow94AZulO5hSWcxwN",
+    "unique_name": "definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA",
     "name": "Netbox - List Interfaces",
     "title": "Netbox - List Interfaces",
     "type": "generic.workflow",
@@ -19,7 +19,7 @@
           "display_on_wizard": true,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETYY62YkG96PuB7PVKlK2DvJ",
+        "unique_name": "variable_workflow_37G79memW76P9aT86612VltvmE4",
         "object_type": "variable_workflow"
       },
       {
@@ -35,7 +35,7 @@
           "display_on_wizard": true,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETY4KJvwChMp3SO8Kvs8FkFT",
+        "unique_name": "variable_workflow_37G79oPk2TuIxipGgWhTmxhyHTa",
         "object_type": "variable_workflow"
       },
       {
@@ -51,7 +51,7 @@
           "display_on_wizard": true,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETRQdcQ7jyph61fEBoSFruWi",
+        "unique_name": "variable_workflow_37G79mIihhi2N88eamlXxq6MR7y",
         "object_type": "variable_workflow"
       },
       {
@@ -67,7 +67,7 @@
           "display_on_wizard": true,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETXqSyiu4uXtSlKbzYcZRmiW",
+        "unique_name": "variable_workflow_37G79mpJf5BzpJNssyT8YbiyNaE",
         "object_type": "variable_workflow"
       },
       {
@@ -83,7 +83,7 @@
           "display_on_wizard": true,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETV0FYq9aufa2B0BuNN6pdG5",
+        "unique_name": "variable_workflow_37G79mSFAM3YKwwFjIFabheLgKT",
         "object_type": "variable_workflow"
       },
       {
@@ -99,7 +99,7 @@
           "display_on_wizard": true,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETV0yVoDcMbWnHXKon1giytl",
+        "unique_name": "variable_workflow_37G79kPLQ0ywqHEKez8xjtOEdnK",
         "object_type": "variable_workflow"
       },
       {
@@ -115,7 +115,7 @@
           "display_on_wizard": true,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETQxd8I7Lo7BfPYR9uWe4ckb",
+        "unique_name": "variable_workflow_37G79koKIM5pVzss8VmWSO806iH",
         "object_type": "variable_workflow"
       },
       {
@@ -131,7 +131,7 @@
           "display_on_wizard": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETXUVy32D2tLctKOHHKuqWDY",
+        "unique_name": "variable_workflow_37G79o1wEHn6cgLI6dfOeizNL65",
         "object_type": "variable_workflow"
       },
       {
@@ -147,7 +147,7 @@
           "display_on_wizard": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETWpEwN0IezOumN9ODmwkZ26",
+        "unique_name": "variable_workflow_37G79oGjORhEj10jKPCppSgEgJU",
         "object_type": "variable_workflow"
       },
       {
@@ -163,7 +163,7 @@
           "display_on_wizard": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETTgidXa8xdJA7Nlyf56TCqr",
+        "unique_name": "variable_workflow_37G79nlYd82nyRo1LfI7UJgU2DT",
         "object_type": "variable_workflow"
       },
       {
@@ -179,7 +179,7 @@
           "display_on_wizard": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_36JETXBHFrdNXQs73fGFPD9F2q8",
+        "unique_name": "variable_workflow_37G79nkX62oxGRfhKM6XLjN4Zfk",
         "object_type": "variable_workflow"
       },
       {
@@ -195,7 +195,7 @@
           "is_invisible": false,
           "variable_string_format": "text"
         },
-        "unique_name": "variable_workflow_36JETWZ23MwOX8uh9hQbvrUhorf",
+        "unique_name": "variable_workflow_37G79kkzgJdEzQvKAJIifPVLbED",
         "object_type": "variable_workflow"
       },
       {
@@ -211,7 +211,7 @@
           "is_invisible": false,
           "variable_string_format": ""
         },
-        "unique_name": "variable_workflow_36JETWUOp9wmKz0HRg9i8zsEsER",
+        "unique_name": "variable_workflow_37G79kuTqjLnGGlBrupaIAPzCG8",
         "object_type": "variable_workflow"
       },
       {
@@ -227,7 +227,7 @@
           "is_invisible": false,
           "variable_string_format": "text"
         },
-        "unique_name": "variable_workflow_36JETSEyV6hLwySUnjE7H7GyWk5",
+        "unique_name": "variable_workflow_37G79mQrIbbvFDkUxzygzbfE7gO",
         "object_type": "variable_workflow"
       }
     ],
@@ -237,7 +237,7 @@
         "is_atomic": true
       },
       "description": "Get a list of interface objects.",
-      "display_name": "List Interfaces",
+      "display_name": "Netbox - List Interfaces",
       "runtime_user": {
         "target_default": true
       },
@@ -249,7 +249,7 @@
     "object_type": "definition_workflow",
     "actions": [
       {
-        "unique_name": "definition_activity_36JETWPvMup2Hk2Pm4eE475Lwpq",
+        "unique_name": "definition_activity_37G79kq7hR6yBF1igF76ZhW66ub",
         "name": "Execute Python Script",
         "title": "Prepare Query Params",
         "type": "python3.script",
@@ -260,13 +260,13 @@
           "display_name": "Prepare Query Params",
           "script": "import sys\nimport urllib.parse\n\n(description, device_id, id, limit, name, q, tag) = sys.argv[1:8]\n\nqueryStr = \"\"\nfirst = True\n\nif description != '':\n    if not first:\n        queryStr += '\u0026'\n    queryStr += \"description=\" + urllib.parse.quote_plus(str(description))\n    first = False\n\nif device_id != '':\n    if not first:\n        queryStr += '\u0026'\n    queryStr += \"device_id=\" + urllib.parse.quote_plus(str(device_id))\n    first = False\n\nif id != '':\n    if not first:\n        queryStr += '\u0026'\n    queryStr += \"id=\" + urllib.parse.quote_plus(str(id))\n    first = False\n\nif limit != '':\n    if not first:\n        queryStr += '\u0026'\n    queryStr += \"limit=\" + urllib.parse.quote_plus(str(limit))\n    first = False\n\nif name != '':\n    if not first:\n        queryStr += '\u0026'\n    queryStr += \"name=\" + urllib.parse.quote_plus(str(name))\n    first = False\n\nif q != '':\n    if not first:\n        queryStr += '\u0026'\n    queryStr += \"q=\" + urllib.parse.quote_plus(str(q))\n    first = False\n\nif tag != '':\n    if not first:\n        queryStr += '\u0026'\n    queryStr += \"tag=\" + urllib.parse.quote_plus(str(tag))\n    first = False\n\nprint(queryStr)\n",
           "script_arguments": [
-            "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.input.variable_workflow_36JETYY62YkG96PuB7PVKlK2DvJ$",
-            "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.input.variable_workflow_36JETY4KJvwChMp3SO8Kvs8FkFT$",
-            "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.input.variable_workflow_36JETRQdcQ7jyph61fEBoSFruWi$",
-            "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.input.variable_workflow_36JETXqSyiu4uXtSlKbzYcZRmiW$",
-            "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.input.variable_workflow_36JETV0FYq9aufa2B0BuNN6pdG5$",
-            "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.input.variable_workflow_36JETV0yVoDcMbWnHXKon1giytl$",
-            "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.input.variable_workflow_36JETQxd8I7Lo7BfPYR9uWe4ckb$"
+            "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.input.variable_workflow_37G79memW76P9aT86612VltvmE4$",
+            "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.input.variable_workflow_37G79oPk2TuIxipGgWhTmxhyHTa$",
+            "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.input.variable_workflow_37G79mIihhi2N88eamlXxq6MR7y$",
+            "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.input.variable_workflow_37G79mpJf5BzpJNssyT8YbiyNaE$",
+            "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.input.variable_workflow_37G79mSFAM3YKwwFjIFabheLgKT$",
+            "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.input.variable_workflow_37G79kPLQ0ywqHEKez8xjtOEdnK$",
+            "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.input.variable_workflow_37G79koKIM5pVzss8VmWSO806iH$"
           ],
           "script_queries": [
             {
@@ -281,7 +281,7 @@
         "blocks": []
       },
       {
-        "unique_name": "definition_activity_36JETVrGvTzk92A7mObeNHRRcvd",
+        "unique_name": "definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n",
         "name": "API Request for List Interfaces",
         "title": "List Interfaces",
         "type": "netbox.invoke_api",
@@ -291,7 +291,7 @@
           "continue_on_failure": true,
           "display_name": "List Interfaces",
           "_method": "GET",
-          "_endpoint": "/api/dcim/interfaces/?$activity.definition_activity_36JETWPvMup2Hk2Pm4eE475Lwpq.output.script_queries.queryStr$",
+          "_endpoint": "/api/dcim/interfaces/?$activity.definition_activity_37G79kq7hR6yBF1igF76ZhW66ub.output.script_queries.queryStr$",
           "runtime_user": {
             "target_default": true
           },
@@ -304,7 +304,7 @@
         "blocks": []
       },
       {
-        "unique_name": "definition_activity_36JETWEQvENIjD3pnIPYc36HoiI",
+        "unique_name": "definition_activity_37G79iHZleKmGyKKOWxQOWz4nVf",
         "name": "Condition Block",
         "title": "Was the Request Successful?",
         "type": "logic.if_else",
@@ -319,14 +319,14 @@
         "object_type": "definition_activity",
         "blocks": [
           {
-            "unique_name": "definition_activity_36JETVPL4c4tcawrx2vEk775iA4",
+            "unique_name": "definition_activity_37G79lw8v0ZAzhfZlyPs61PniqG",
             "name": "Condition Branch",
             "title": "200/Success",
             "type": "logic.condition_block",
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.status_code$",
+                "left_operand": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.status_code$",
                 "operator": "eq",
                 "right_operand": 200
               },
@@ -337,7 +337,7 @@
             "object_type": "definition_activity",
             "actions": [
               {
-                "unique_name": "definition_activity_36JETXffMhmxkTwre7M3RLomtyP",
+                "unique_name": "definition_activity_37G79jkAsIopoOEUAplHWnSCz57",
                 "name": "JSONPath Query",
                 "title": "Extract API Results",
                 "type": "corejava.jsonpathquery",
@@ -346,7 +346,7 @@
                   "action_timeout": 180,
                   "continue_on_failure": true,
                   "display_name": "Extract API Results",
-                  "input_json": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.raw_body$",
+                  "input_json": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.raw_body$",
                   "jsonpath_queries": [
                     {
                       "jsonpath_query": "$",
@@ -385,7 +385,7 @@
                 "blocks": []
               },
               {
-                "unique_name": "definition_activity_36JETWOjYyahgoZ7N0QMbgZ3TGc",
+                "unique_name": "definition_activity_37G79o3iG4skAgEtj1pxek2nwaW",
                 "name": "Set Variables",
                 "title": "Set Output Variables",
                 "type": "core.set_multiple_variables",
@@ -396,32 +396,32 @@
                   "skip_execution": false,
                   "variables_to_update": [
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETWUOp9wmKz0HRg9i8zsEsER$",
-                      "variable_value_new": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.status_code$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79kuTqjLnGGlBrupaIAPzCG8$",
+                      "variable_value_new": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.status_code$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.workflow_results$",
-                      "variable_value_new": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.raw_body$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.raw_body$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.workflow_results_code$",
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.workflow_results_code$",
                       "variable_value_new": "completed-successfully"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETXUVy32D2tLctKOHHKuqWDY$",
-                      "variable_value_new": "$activity.definition_activity_36JETXffMhmxkTwre7M3RLomtyP.output.jsonpath_queries.Count$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79o1wEHn6cgLI6dfOeizNL65$",
+                      "variable_value_new": "$activity.definition_activity_37G79jkAsIopoOEUAplHWnSCz57.output.jsonpath_queries.Count$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETWpEwN0IezOumN9ODmwkZ26$",
-                      "variable_value_new": "$activity.definition_activity_36JETXffMhmxkTwre7M3RLomtyP.output.jsonpath_queries.Next$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79oGjORhEj10jKPCppSgEgJU$",
+                      "variable_value_new": "$activity.definition_activity_37G79jkAsIopoOEUAplHWnSCz57.output.jsonpath_queries.Next$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETTgidXa8xdJA7Nlyf56TCqr$",
-                      "variable_value_new": "$activity.definition_activity_36JETXffMhmxkTwre7M3RLomtyP.output.jsonpath_queries.Previous$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79nlYd82nyRo1LfI7UJgU2DT$",
+                      "variable_value_new": "$activity.definition_activity_37G79jkAsIopoOEUAplHWnSCz57.output.jsonpath_queries.Previous$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETXBHFrdNXQs73fGFPD9F2q8$",
-                      "variable_value_new": "$activity.definition_activity_36JETXffMhmxkTwre7M3RLomtyP.output.jsonpath_queries.Results$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79nkX62oxGRfhKM6XLjN4Zfk$",
+                      "variable_value_new": "$activity.definition_activity_37G79jkAsIopoOEUAplHWnSCz57.output.jsonpath_queries.Results$"
                     }
                   ]
                 },
@@ -429,7 +429,7 @@
                 "blocks": []
               },
               {
-                "unique_name": "definition_activity_36JETTgPD6Piq72sxf2AAok5Q9t",
+                "unique_name": "definition_activity_37G79o4MKaEZAAQiwx3UQLO8IuW",
                 "name": "Completed",
                 "title": "Completed - Success",
                 "type": "logic.completed",
@@ -438,36 +438,36 @@
                   "completion_type": "succeeded",
                   "continue_on_failure": false,
                   "display_name": "Completed - Success",
-                  "result_message": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.workflow_results$",
+                  "result_message": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.workflow_results$",
                   "skip_execution": false,
                   "variables_to_update": [
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETWUOp9wmKz0HRg9i8zsEsER$",
-                      "variable_value_new": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.status_code$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79kuTqjLnGGlBrupaIAPzCG8$",
+                      "variable_value_new": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.status_code$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.workflow_results$",
-                      "variable_value_new": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.raw_body$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.raw_body$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.workflow_results_code$",
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.workflow_results_code$",
                       "variable_value_new": "completed-successfully"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETXUVy32D2tLctKOHHKuqWDY$",
-                      "variable_value_new": "$activity.definition_activity_36JETXffMhmxkTwre7M3RLomtyP.output.jsonpath_queries.Count$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79o1wEHn6cgLI6dfOeizNL65$",
+                      "variable_value_new": "$activity.definition_activity_37G79jkAsIopoOEUAplHWnSCz57.output.jsonpath_queries.Count$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETWpEwN0IezOumN9ODmwkZ26$",
-                      "variable_value_new": "$activity.definition_activity_36JETXffMhmxkTwre7M3RLomtyP.output.jsonpath_queries.Next$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79oGjORhEj10jKPCppSgEgJU$",
+                      "variable_value_new": "$activity.definition_activity_37G79jkAsIopoOEUAplHWnSCz57.output.jsonpath_queries.Next$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETTgidXa8xdJA7Nlyf56TCqr$",
-                      "variable_value_new": "$activity.definition_activity_36JETXffMhmxkTwre7M3RLomtyP.output.jsonpath_queries.Previous$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79nlYd82nyRo1LfI7UJgU2DT$",
+                      "variable_value_new": "$activity.definition_activity_37G79jkAsIopoOEUAplHWnSCz57.output.jsonpath_queries.Previous$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETXBHFrdNXQs73fGFPD9F2q8$",
-                      "variable_value_new": "$activity.definition_activity_36JETXffMhmxkTwre7M3RLomtyP.output.jsonpath_queries.Results$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79nkX62oxGRfhKM6XLjN4Zfk$",
+                      "variable_value_new": "$activity.definition_activity_37G79jkAsIopoOEUAplHWnSCz57.output.jsonpath_queries.Results$"
                     }
                   ]
                 },
@@ -477,14 +477,14 @@
             ]
           },
           {
-            "unique_name": "definition_activity_36JETUHQGIALXlbCskoa5jpaKyW",
+            "unique_name": "definition_activity_37G79mcgpBttfYgG13HHpo9TaDn",
             "name": "Condition Branch",
             "title": "Failed",
             "type": "logic.condition_block",
             "base_type": "activity",
             "properties": {
               "condition": {
-                "left_operand": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.status_code$",
+                "left_operand": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.status_code$",
                 "operator": "ne",
                 "right_operand": 200
               },
@@ -495,37 +495,7 @@
             "object_type": "definition_activity",
             "actions": [
               {
-                "unique_name": "definition_activity_36JETXGix0UQxUjKAktM77fBhNX",
-                "name": "JSONPath Query",
-                "title": "Extract API Results",
-                "type": "corejava.jsonpathquery",
-                "base_type": "activity",
-                "properties": {
-                  "action_timeout": 180,
-                  "continue_on_failure": true,
-                  "display_name": "Extract API Results",
-                  "input_json": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.raw_body$",
-                  "jsonpath_queries": [
-                    {
-                      "jsonpath_query": "$",
-                      "jsonpath_query_name": "Result",
-                      "jsonpath_query_type": "string",
-                      "zdate_type_format": "yyyy-MM-dd'T'HH:mm:ssZ"
-                    },
-                    {
-                      "jsonpath_query": "$.errors",
-                      "jsonpath_query_name": "Error Message",
-                      "jsonpath_query_type": "string",
-                      "zdate_type_format": "yyyy-MM-dd'T'HH:mm:ssZ"
-                    }
-                  ],
-                  "skip_execution": false
-                },
-                "object_type": "definition_activity",
-                "blocks": []
-              },
-              {
-                "unique_name": "definition_activity_36JETWS1xwdTzTxMGQsX22snjEW",
+                "unique_name": "definition_activity_37G79mile30XbCQfD6etf8ixLiw",
                 "name": "Set Variables",
                 "title": "Set Output Variables",
                 "type": "core.set_multiple_variables",
@@ -536,19 +506,19 @@
                   "skip_execution": false,
                   "variables_to_update": [
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETWUOp9wmKz0HRg9i8zsEsER$",
-                      "variable_value_new": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.status_code$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79kuTqjLnGGlBrupaIAPzCG8$",
+                      "variable_value_new": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.status_code$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETSEyV6hLwySUnjE7H7GyWk5$",
-                      "variable_value_new": "$activity.definition_activity_36JETXGix0UQxUjKAktM77fBhNX.output.jsonpath_queries.Error Message$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79mQrIbbvFDkUxzygzbfE7gO$",
+                      "variable_value_new": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.error.message$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.workflow_results$",
-                      "variable_value_new": "$activity.definition_activity_36JETVrGvTzk92A7mObeNHRRcvd.output.raw_body$"
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G79hAwpbU4fFhpyxlMcThoP8n.output.raw_body$"
                     },
                     {
-                      "variable_to_update": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.workflow_results_code$",
+                      "variable_to_update": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.workflow_results_code$",
                       "variable_value_new": "workflow-errored"
                     }
                   ]
@@ -557,7 +527,7 @@
                 "blocks": []
               },
               {
-                "unique_name": "definition_activity_36JETSadfW18REGKWLCbOoMfpz4",
+                "unique_name": "definition_activity_37G79l7ykCOGftTt4vLVeFpj5CX",
                 "name": "Completed",
                 "title": "Completed - Failed",
                 "type": "logic.completed",
@@ -566,7 +536,7 @@
                   "completion_type": "failed-completed",
                   "continue_on_failure": false,
                   "display_name": "Completed - Failed",
-                  "result_message": "$workflow.definition_workflow_36JETSCHFaow94AZulO5hSWcxwN.output.variable_workflow_36JETSEyV6hLwySUnjE7H7GyWk5$",
+                  "result_message": "$workflow.definition_workflow_37G79lgCuAXpyrt2T92PvJhy1NA.output.variable_workflow_37G79mQrIbbvFDkUxzygzbfE7gO$",
                   "skip_execution": false
                 },
                 "object_type": "definition_activity",

@@ -8,27 +8,219 @@ defaults:
     - status
     - tenant
 workflows:
+  # Circuits
+  - endpoint: /circuits/circuit-group-assignments
+    methods: [GET]
+  - endpoint: /circuits/circuit-groups
+    methods: [GET]
+  - endpoint: /circuits/circuit-terminations
+    methods: [GET]
+  - endpoint: /circuits/circuit-types
+    methods: [GET]
+  - endpoint: /circuits/circuits
+    methods: [GET]
+  - endpoint: /circuits/provider-accounts
+    methods: [GET]
+  - endpoint: /circuits/provider-networks
+    methods: [GET]
+  - endpoint: /circuits/providers
+    methods: [GET]
+  - endpoint: /circuits/virtual-circuit-terminations
+    methods: [GET]
+  - endpoint: /circuits/virtual-circuit-types
+    methods: [GET]
+  - endpoint: /circuits/virtual-circuits
+    methods: [GET]
+
+  # Core
+  - endpoint: /core/background-tasks
+    methods: [GET]
+  - endpoint: /core/data-files
+    methods: [GET]
+  - endpoint: /core/data-sources
+    methods: [GET]
+  - endpoint: /core/jobs
+    methods: [GET]
+  - endpoint: /core/object-changes
+    methods: [GET]
+  - endpoint: /core/object-types
+    methods: [GET]
+
+  # DCIM
+  - endpoint: /dcim/cable-terminations
+    methods: [GET]
+  - endpoint: /dcim/cables
+    methods: [GET]
+  - endpoint: /dcim/console-port-templates
+    methods: [GET]
+  - endpoint: /dcim/console-ports
+    methods: [GET]
+  - endpoint: /dcim/console-server-port-templates
+    methods: [GET]
+  - endpoint: /dcim/console-server-ports
+    methods: [GET]
+  - endpoint: /dcim/device-bay-templates
+    methods: [GET]
+  - endpoint: /dcim/device-bays
+    methods: [GET]
+  - endpoint: /dcim/device-roles
+    methods: [GET,POST]
+  - endpoint: /dcim/device-roles/{id}
+    methods: [PATCH]
+  - endpoint: /dcim/device-types
+    methods: [GET,POST]
+  - endpoint: /dcim/device-types/{id}
+    methods: [PATCH]
   - endpoint: /dcim/devices
+    methods: [GET,POST]
     query_params:
       - site
       - has_primary_ip
-    options:
-      category_id: category_02SwHL6MlMREsr8ryQRwyPYqEHI8m8see7i
-      category_name: NetBox
-      support_idempotency: false
-
-  # - endpoint: /dcim/devices/{id}
-  #   methods: [GET, DELETE]
-  #   options:
-  #     platform: Netbox
-  #     support_idempotency: true
-  #     idempotency_condition: "404"
-
+  - endpoint: /dcim/devices/{id}
+    methods: [PATCH]
+  - endpoint: /dcim/front-port-templates
+    methods: [GET]
+  - endpoint: /dcim/front-ports
+    methods: [GET]
+  - endpoint: /dcim/interface-templates
+    methods: [GET]
   - endpoint: /dcim/interfaces
-    query_params: [q, device_id, tag]
-    # methods omitted -> generates all available methods on that endpoint
+    methods: [GET,POST]
+    query_params:
+      - device_id
+      - tag
+  - endpoint: /dcim/interfaces/{id}
+    methods: [PATCH]
+  - endpoint: /dcim/inventory-item-roles
+    methods: [GET]
+  - endpoint: /dcim/inventory-item-templates
+    methods: [GET]
+  - endpoint: /dcim/inventory-items
+    methods: [GET]
+  - endpoint: /dcim/locations
+    methods: [GET,POST]
+  - endpoint: /dcim/locations/{id}
+    methods: [PATCH]
+  - endpoint: /dcim/mac-addresses
+    methods: [GET,POST]
+  - endpoint: /dcim/mac-addresses/{id}
+    methods: [PATCH]
+  - endpoint: /dcim/manufacturers
+    methods: [GET,POST]
+  - endpoint: /dcim/manufacturers/{id}
+    methods: [PATCH]
+  - endpoint: /dcim/module-bay-templates
+    methods: [GET]
+  - endpoint: /dcim/module-bays
+    methods: [GET]
+  - endpoint: /dcim/module-type-profiles
+    methods: [GET]
+  - endpoint: /dcim/module-types
+    methods: [GET]
+  - endpoint: /dcim/modules
+    methods: [GET]
+  - endpoint: /dcim/platforms
+    methods: [GET,POST]
+  - endpoint: /dcim/platforms/{id}
+    methods: [PATCH]
+  - endpoint: /dcim/power-feeds
+    methods: [GET]
+  - endpoint: /dcim/power-outlet-templates
+    methods: [GET]
+  - endpoint: /dcim/power-outlets
+    methods: [GET]
+  - endpoint: /dcim/power-panels
+    methods: [GET]
+  - endpoint: /dcim/power-port-templates
+    methods: [GET]
+  - endpoint: /dcim/power-ports
+    methods: [GET]
+  - endpoint: /dcim/rack-reservations
+    methods: [GET]
+  - endpoint: /dcim/rack-roles
+    methods: [GET]
+  - endpoint: /dcim/rack-types
+    methods: [GET]
+  - endpoint: /dcim/racks
+    methods: [GET]
+  - endpoint: /dcim/rear-port-templates
+    methods: [GET]
+  - endpoint: /dcim/rear-ports
+    methods: [GET]
+  - endpoint: /dcim/regions
+    methods: [GET,POST]
+  - endpoint: /dcim/regions/{id}
+    methods: [PATCH]
+  - endpoint: /dcim/site-groups
+    methods: [GET]
+  - endpoint: /dcim/sites
+    methods: [GET,POST]
+  - endpoint: /dcim/sites/{id}
+    methods: [PATCH]
+  - endpoint: /dcim/virtual-chassis
+    methods: [GET]
+  - endpoint: /dcim/virtual-device-contexts
+    methods: [GET]
+
+  # Extras
+  - endpoint: /extras/bookmarks
+    methods: [GET]
+  - endpoint: /extras/config-context-profiles
+    methods: [GET]
+  - endpoint: /extras/config-contexts
+    methods: [GET]
+  - endpoint: /extras/config-templates
+    methods: [GET]
+  - endpoint: /extras/custom-field-choice-sets
+    methods: [GET]
+  - endpoint: /extras/custom-fields
+    methods: [GET]
+  - endpoint: /extras/custom-links
+    methods: [GET]
+  - endpoint: /extras/event-rules
+    methods: [GET]
+  - endpoint: /extras/export-templates
+    methods: [GET]
+  - endpoint: /extras/image-attachments
+    methods: [GET]
+  - endpoint: /extras/journal-entries
+    methods: [GET]
+  - endpoint: /extras/notification-groups
+    methods: [GET]
+  - endpoint: /extras/notifications
+    methods: [GET]
+  - endpoint: /extras/saved-filters
+    methods: [GET]
+  - endpoint: /extras/subscriptions
+    methods: [GET]
+  - endpoint: /extras/tags
+    methods: [GET]
+  - endpoint: /extras/webhooks
+    methods: [GET]
+
+  # IPAM
   - endpoint: /ipam/aggregates
+    methods: [GET,POST]
+  - endpoint: /ipam/aggregates/{id}
+    methods: [PATCH]
+  - endpoint: /ipam/asn-ranges
+    methods: [GET]
+  - endpoint: /ipam/asns
+    methods: [GET]
+  - endpoint: /ipam/fhrp-group-assignments
+    methods: [GET]
+  - endpoint: /ipam/fhrp-groups
+    methods: [GET]
+  - endpoint: /ipam/ip-addresses
+    methods: [GET,POST]
+    query_params:
+      - dns_name
+  - endpoint: /ipam/ip-addresses/{id}
+    methods: [PATCH]
+  - endpoint: /ipam/ip-ranges
+    methods: [GET]
   - endpoint: /ipam/prefixes
+    methods: [GET,POST]
     query_params:
       - contains
       - within
@@ -36,10 +228,101 @@ workflows:
       - site
       - vlan_id
       - vrf
-  - endpoint: /ipam/prefixes/{id}/available-prefixes
-    body_params:
-      - status
-      - description
-      - prefix_length
-  - endpoint: /ipam/ip-addresses
-  - endpoint: /ipam/ip-addresses/{id}
+  - endpoint: /ipam/prefixes/{id}
+    methods: [PATCH]
+  - endpoint: /ipam/rirs
+    methods: [GET]
+  - endpoint: /ipam/roles
+    methods: [GET]
+  - endpoint: /ipam/route-targets
+    methods: [GET]
+  - endpoint: /ipam/service-templates
+    methods: [GET]
+  - endpoint: /ipam/services
+    methods: [GET]
+  - endpoint: /ipam/vlan-groups
+    methods: [GET]
+  - endpoint: /ipam/vlan-translation-policies
+    methods: [GET]
+  - endpoint: /ipam/vlan-translation-rules
+    methods: [GET]
+  - endpoint: /ipam/vlans
+    methods: [GET,POST]
+  - endpoint: /ipam/vlans/{id}
+    methods: [PATCH]
+  - endpoint: /ipam/vrfs
+    methods: [GET,POST]
+  - endpoint: /ipam/vrfs/{id}
+    methods: [PATCH]
+
+  # Tenancy
+  - endpoint: /tenancy/contact-assignments
+    methods: [GET]
+  - endpoint: /tenancy/contact-groups
+    methods: [GET]
+  - endpoint: /tenancy/contact-roles
+    methods: [GET]
+  - endpoint: /tenancy/contacts
+    methods: [GET]
+  - endpoint: /tenancy/tenant-groups
+    methods: [GET]
+  - endpoint: /tenancy/tenants
+    methods: [GET,POST]
+  - endpoint: /tenancy/tenants/{id}
+    methods: [PATCH]
+
+  # Users
+  - endpoint: /users/groups
+    methods: [GET]
+  - endpoint: /users/permissions
+    methods: [GET]
+  - endpoint: /users/tokens
+    methods: [GET]
+  - endpoint: /users/users
+    methods: [GET]
+
+  # Virtualization
+  - endpoint: /virtualization/cluster-groups
+    methods: [GET]
+  - endpoint: /virtualization/cluster-types
+    methods: [GET]
+  - endpoint: /virtualization/clusters
+    methods: [GET]
+  - endpoint: /virtualization/interfaces
+    methods: [GET]
+  - endpoint: /virtualization/virtual-disks
+    methods: [GET]
+  - endpoint: /virtualization/virtual-machines
+    methods: [GET]
+
+  # VPN
+  - endpoint: /vpn/ike-policies
+    methods: [GET]
+  - endpoint: /vpn/ike-proposals
+    methods: [GET]
+  - endpoint: /vpn/ipsec-policies
+    methods: [GET]
+  - endpoint: /vpn/ipsec-profiles
+    methods: [GET]
+  - endpoint: /vpn/ipsec-proposals
+    methods: [GET]
+  - endpoint: /vpn/l2vpn-terminations
+    methods: [GET]
+  - endpoint: /vpn/l2vpns
+    methods: [GET]
+  - endpoint: /vpn/tunnel-groups
+    methods: [GET]
+  - endpoint: /vpn/tunnel-terminations
+    methods: [GET]
+  - endpoint: /vpn/tunnels
+    methods: [GET]
+
+  # Wireless
+  - endpoint: /wireless/wireless-lan-groups
+    methods: [GET]
+  - endpoint: /wireless/wireless-lans
+    methods: [GET,POST]
+  - endpoint: /wireless/wireless-lans/{id}
+    methods: [PATCH]
+  - endpoint: /wireless/wireless-links
+    methods: [GET]

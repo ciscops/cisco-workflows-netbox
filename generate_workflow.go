@@ -169,6 +169,12 @@ type VariableUpdate struct {
 	VariableValueNew string `json:"variable_value_new"`
 }
 
+type BodyParam struct {
+	Name     string
+	Required bool
+	Type     string
+}
+
 type CategoryData struct {
 	UniqueName   string `json:"unique_name"`
 	Name         string `json:"name"`
@@ -192,6 +198,7 @@ type PathItem struct {
 	Get    *Operation `json:"get,omitempty"`
 	Post   *Operation `json:"post,omitempty"`
 	Put    *Operation `json:"put,omitempty"`
+	Patch  *Operation `json:"patch,omitempty"`
 	Delete *Operation `json:"delete,omitempty"`
 }
 
@@ -500,6 +507,9 @@ func ExtractOperation(openAPISpec OpenAPISpec, operationId string) (*Operation, 
 		if pathItem.Put != nil && pathItem.Put.OperationId == operationId {
 			return pathItem.Put, path, "PUT", nil
 		}
+		if pathItem.Patch != nil && pathItem.Patch.OperationId == operationId {
+			return pathItem.Patch, path, "PATCH", nil
+		}
 		if pathItem.Delete != nil && pathItem.Delete.OperationId == operationId {
 			return pathItem.Delete, path, "DELETE", nil
 		}
@@ -622,7 +632,10 @@ func HumanReadableName(name string) string {
 		}
 		result = append(result, char)
 	}
-	return strings.Title(strings.ToLower(string(result)))
+	formatted := strings.Title(strings.ToLower(string(result)))
+	// Normalize "Partial Update" to "Update"
+	formatted = strings.ReplaceAll(formatted, "Partial Update", "Update")
+	return formatted
 }
 
 func singularize(word string) string {
@@ -698,7 +711,7 @@ func buildOperationDisplayName(operationId, path, method string) string {
 		action = "Update"
 		resourceName = singularize(resourceName)
 	case "PATCH":
-		action = "Partial Update"
+		action = "Update"
 		resourceName = singularize(resourceName)
 	case "DELETE":
 		action = "Delete"
@@ -836,10 +849,16 @@ func normalizeOpenAPIContent(data []byte) ([]byte, error) {
 	return jsonData, nil
 }
 
-func buildAPIRequestAction(operation *Operation, endpoint string, method string, hasBody bool, displayName string) ActionData {
+func buildAPIRequestAction(operation *Operation, endpoint string, method string, hasBody bool, displayName string, bodyRef string) ActionData {
 	var body string
 	if hasBody {
-		body = GenerateAPIRequestBody(operation.RequestBody.Content.ApplicationJSON.Schema)
+		if bodyRef != "" {
+			// Use the Python-prepared body reference
+			body = bodyRef
+		} else {
+			// Use the static template (fallback for non-NetBox)
+			body = GenerateAPIRequestBody(operation.RequestBody.Content.ApplicationJSON.Schema)
+		}
 	}
 	props := currentConnector.BuildActionProps(method, endpoint, body, hasBody, operation, displayName)
 	return ActionData{
@@ -1023,6 +1042,134 @@ func buildQueryPrepAction(queryParams []Parameter) (ActionData, string) {
 
 	queryReference := fmt.Sprintf("$activity.%s.output.script_queries.queryStr$", scriptAction.UniqueName)
 	return scriptAction, queryReference
+}
+
+func buildRequestBodyPrepAction(bodySchema Schema, operationId string) (ActionData, string) {
+	// Extract properties from schema
+	var bodyParams []BodyParam
+	switch bodySchema.Type {
+	case "object":
+		for propName, propSchema := range bodySchema.Properties {
+			isRequired := contains(bodySchema.Required, propName)
+			bodyParams = append(bodyParams, BodyParam{
+				Name:     propName,
+				Required: isRequired,
+				Type:     propSchema.Type,
+			})
+		}
+	case "array":
+		if bodySchema.Items != nil && bodySchema.Items.Type == "object" {
+			for propName, propSchema := range bodySchema.Items.Properties {
+				isRequired := contains(bodySchema.Items.Required, propName)
+				bodyParams = append(bodyParams, BodyParam{
+					Name:     propName,
+					Required: isRequired,
+					Type:     propSchema.Type,
+				})
+			}
+		}
+	}
+
+	// Sort bodyParams for consistent output
+	sort.Slice(bodyParams, func(i, j int) bool {
+		return bodyParams[i].Name < bodyParams[j].Name
+	})
+
+	// Generate Python script
+	var scriptBuilder strings.Builder
+	scriptBuilder.WriteString("import json\n\n")
+
+	// Import input variables
+	for _, param := range bodyParams {
+		variableRef := fmt.Sprintf("$workflow.definition_workflow_$WorkflowKSUID.input.variable_workflow_$%sKSUID$", param.Name)
+		pyVar := pythonIdentifier(param.Name, "param", 0)
+		scriptBuilder.WriteString(fmt.Sprintf("%s = '%s'\n", pyVar, variableRef))
+	}
+
+	scriptBuilder.WriteString("\nrequest_body_object = {}\n")
+
+	// Build conditional field additions
+	for _, param := range bodyParams {
+		pyVar := pythonIdentifier(param.Name, "param", 0)
+		
+		// Determine how to add the value based on type
+		var valueExpr string
+		switch param.Type {
+		case "array", "object":
+			// Parse JSON strings for arrays and objects
+			valueExpr = fmt.Sprintf("json.loads(%s) if %s != '' else None", pyVar, pyVar)
+		case "integer", "number":
+			// Convert to int/float
+			if param.Type == "integer" {
+				valueExpr = fmt.Sprintf("int(%s) if %s != '' else None", pyVar, pyVar)
+			} else {
+				valueExpr = fmt.Sprintf("float(%s) if %s != '' else None", pyVar, pyVar)
+			}
+		case "boolean":
+			// Convert to boolean
+			valueExpr = fmt.Sprintf("%s.lower() == 'true' if %s != '' else None", pyVar, pyVar)
+		default:
+			// Keep as string
+			valueExpr = pyVar
+		}
+		
+		if param.Required {
+			// Required fields: add with appropriate type conversion
+			if param.Type == "array" || param.Type == "object" {
+				scriptBuilder.WriteString(fmt.Sprintf("if %s != '':\n", pyVar))
+				scriptBuilder.WriteString(fmt.Sprintf("    request_body_object[\"%s\"] = %s\n", param.Name, valueExpr))
+			} else if param.Type == "integer" || param.Type == "number" || param.Type == "boolean" {
+				scriptBuilder.WriteString(fmt.Sprintf("if %s != '':\n", pyVar))
+				scriptBuilder.WriteString(fmt.Sprintf("    request_body_object[\"%s\"] = %s\n", param.Name, valueExpr))
+			} else {
+				scriptBuilder.WriteString(fmt.Sprintf("request_body_object[\"%s\"] = %s\n", param.Name, pyVar))
+			}
+		} else {
+			// Optional fields: only add if non-empty
+			scriptBuilder.WriteString(fmt.Sprintf("if %s != '':\n", pyVar))
+			if param.Type == "array" || param.Type == "object" || param.Type == "integer" || param.Type == "number" || param.Type == "boolean" {
+				scriptBuilder.WriteString(fmt.Sprintf("    value = %s\n", valueExpr))
+				scriptBuilder.WriteString(fmt.Sprintf("    if value is not None:\n"))
+				scriptBuilder.WriteString(fmt.Sprintf("        request_body_object[\"%s\"] = value\n", param.Name))
+			} else {
+				scriptBuilder.WriteString(fmt.Sprintf("    request_body_object[\"%s\"] = %s\n", param.Name, pyVar))
+			}
+		}
+	}
+
+	// Determine if we need array wrapping
+	needsArrayWrap := bodySchema.Type == "array" || strings.Contains(operationId, "_available_")
+	if needsArrayWrap {
+		scriptBuilder.WriteString("request_body_string = json.dumps([request_body_object])\n")
+	} else {
+		scriptBuilder.WriteString("request_body_string = json.dumps(request_body_object)\n")
+	}
+
+	scriptAction := ActionData{
+		UniqueName: "definition_activity_" + KSUIDGenerator(),
+		Name:       "Execute Python Script",
+		Title:      "Prepare Request Body",
+		Type:       "python3.script",
+		BaseType:   "activity",
+		Properties: map[string]interface{}{
+			"action_timeout":      180,
+			"continue_on_failure": false,
+			"display_name":        "Prepare Request Body",
+			"script":              scriptBuilder.String(),
+			"script_queries": []map[string]string{
+				{
+					"script_query":      "request_body_string",
+					"script_query_name": "request_body",
+					"script_query_type": "string",
+				},
+			},
+			"skip_execution": false,
+		},
+		ObjectType: "definition_activity",
+	}
+
+	bodyReference := fmt.Sprintf("$activity.%s.output.script_queries.request_body$", scriptAction.UniqueName)
+	return scriptAction, bodyReference
 }
 
 func loadQueryParamConfig(path string) (map[string][]string, error) {
@@ -1429,6 +1576,9 @@ func availableOperations(item PathItem) map[string]*Operation {
 	if item.Put != nil {
 		result["PUT"] = item.Put
 	}
+	if item.Patch != nil {
+		result["PATCH"] = item.Patch
+	}
 	if item.Delete != nil {
 		result["DELETE"] = item.Delete
 	}
@@ -1726,7 +1876,9 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 	}
 
 	// Add output variables based on the response schema
-	if responseSchema.Type == "object" {
+	// Skip individual property extraction for POST/PATCH/PUT - just return the full result
+	isCreateOrUpdate := strings.EqualFold(method, "POST") || strings.EqualFold(method, "PATCH") || strings.EqualFold(method, "PUT")
+	if responseSchema.Type == "object" && !isCreateOrUpdate {
 		for propName, propSchema := range responseSchema.Properties {
 			name := "Output - " + HumanReadableName(propName)
 			var dataType string
@@ -1770,6 +1922,15 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 		queryReference = reference
 	}
 
+	// Add body preparation for POST/PATCH/PUT in NetBox
+	needsBodyPrep := currentConnector.ActionType == "netbox.invoke_api" && hasRequestBody && (strings.EqualFold(method, "POST") || strings.EqualFold(method, "PATCH") || strings.EqualFold(method, "PUT"))
+	var bodyReference string
+	if needsBodyPrep {
+		bodyPrepAction, bodyRef := buildRequestBodyPrepAction(bodySchema, operation.OperationId)
+		actions = append(actions, bodyPrepAction)
+		bodyReference = bodyRef
+	}
+
 	endpoint := GenerateAPIEndpoint(path, operation.Parameters, !needsQueryPrep)
 	if needsQueryPrep && queryReference != "" {
 		if strings.Contains(endpoint, "?") {
@@ -1779,7 +1940,7 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 		}
 	}
 
-	apiRequestAction := buildAPIRequestAction(operation, endpoint, method, hasRequestBody, operationDisplayName)
+	apiRequestAction := buildAPIRequestAction(operation, endpoint, method, hasRequestBody, operationDisplayName, bodyReference)
 
 	actions = append(actions, apiRequestAction)
 
@@ -1793,7 +1954,6 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 	}
 
 	ConditionalSuccessBlockJsonPathQueryUniqueName := "definition_activity_" + KSUIDGenerator()
-	ConditionalFailedBlockJsonPathQueryUniqueName := "definition_activity_" + KSUIDGenerator()
 
 	responseBodyExpr := fmt.Sprintf("$activity.definition_activity_$ApiRequestKSUID.output.%s$", currentConnector.ResponseBodyField)
 	responseBodyPath := fmt.Sprintf("$%s.output.%s$", apiRequestActionUniqueName, currentConnector.ResponseBodyField)
@@ -1870,7 +2030,7 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 							DisplayName:       "Extract API Results",
 							ContinueOnFailure: true,
 							InputJSON:         responseBodyPath,
-							JsonpathQueries:   GenerateJsonpathQueries(responseSchema, true),
+							JsonpathQueries:   GenerateJsonpathQueries(responseSchema, method),
 							SkipExecution:     false,
 						},
 						ObjectType: "definition_activity",
@@ -1926,22 +2086,6 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 				ObjectType: "definition_activity",
 				Actions: []ActionData{
 					{
-						UniqueName: ConditionalFailedBlockJsonPathQueryUniqueName,
-						Name:       "JSONPath Query",
-						Title:      "Extract API Results",
-						Type:       "corejava.jsonpathquery",
-						BaseType:   "activity",
-						Properties: JsonpathQueryProperties{
-							ActionTimeout:     180,
-							DisplayName:       "Extract API Results",
-							ContinueOnFailure: true,
-							InputJSON:         responseBodyPath,
-							JsonpathQueries:   GenerateJsonpathQueries(responseSchema, false),
-							SkipExecution:     false,
-						},
-						ObjectType: "definition_activity",
-					},
-					{
 						UniqueName: "definition_activity_" + KSUIDGenerator(),
 						Name:       "Set Variables",
 						Title:      "Set Output Variables",
@@ -1963,7 +2107,7 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 							failedUpdates = append(failedUpdates,
 								VariableUpdate{
 									VariableToUpdate: fmt.Sprintf("$workflow.%s.output.%s$", "definition_workflow_$WorkflowKSUID", "variable_workflow_$ErrorMessageKSUID"),
-									VariableValueNew: fmt.Sprintf("$activity.%s.output.jsonpath_queries.%s$", ConditionalFailedBlockJsonPathQueryUniqueName, "Error Message"),
+									VariableValueNew: fmt.Sprintf("$activity.definition_activity_$ApiRequestKSUID.output.error.message$"),
 								},
 								VariableUpdate{
 									VariableToUpdate: "$workflow.definition_workflow_$WorkflowKSUID.output.workflow_results$",
@@ -2167,7 +2311,7 @@ func GenerateWorkflowData(operation *Operation, path string, method string) Work
 	}
 }
 
-func GenerateJsonpathQueries(responseSchema Schema, success bool) []JsonpathQuery {
+func GenerateJsonpathQueries(responseSchema Schema, method string) []JsonpathQuery {
 	var queries []JsonpathQuery
 
 	// Add the fixed "Result" query
@@ -2178,8 +2322,10 @@ func GenerateJsonpathQueries(responseSchema Schema, success bool) []JsonpathQuer
 		ZdateTypeFormat:   "yyyy-MM-dd'T'HH:mm:ssZ",
 	})
 
-	if success {
-		// Generate queries for each property in the response schema
+	isCreateOrUpdate := strings.EqualFold(method, "POST") || strings.EqualFold(method, "PATCH") || strings.EqualFold(method, "PUT")
+	
+	if !isCreateOrUpdate {
+		// Generate queries for each property in the response schema (skip for POST/PATCH/PUT)
 		for propName, propSchema := range responseSchema.Properties {
 			queryName := HumanReadableName(propName)
 
@@ -2195,14 +2341,6 @@ func GenerateJsonpathQueries(responseSchema Schema, success bool) []JsonpathQuer
 				ZdateTypeFormat:   "yyyy-MM-dd'T'HH:mm:ssZ",
 			})
 		}
-	} else {
-		// Add the default "Error Message" query for failure
-		queries = append(queries, JsonpathQuery{
-			JsonpathQuery:     "$.errors",
-			JsonpathQueryName: "Error Message",
-			JsonpathQueryType: "string",
-			ZdateTypeFormat:   "yyyy-MM-dd'T'HH:mm:ssZ",
-		})
 	}
 
 	return queries
@@ -2371,7 +2509,13 @@ func applyPlatformPrefix(workflowData *WorkflowData) {
 	}
 	prefix := platformName + " - "
 
-	// Only prefix workflow name and title
+	// Normalize "Partial Update" to "Update" before adding prefix
+	workflowData.Name = strings.ReplaceAll(workflowData.Name, "Partial Update", "Update")
+	workflowData.Title = strings.ReplaceAll(workflowData.Title, "Partial Update", "Update")
+	workflowData.Properties.DisplayName = strings.ReplaceAll(workflowData.Properties.DisplayName, "Partial Update", "Update")
+	
+	// Prefix workflow name, title, and display name
 	workflowData.Name = prefix + workflowData.Name
 	workflowData.Title = prefix + workflowData.Title
+	workflowData.Properties.DisplayName = prefix + workflowData.Properties.DisplayName
 }

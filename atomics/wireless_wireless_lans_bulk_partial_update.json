@@ -1,0 +1,538 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD",
+    "name": "Netbox - Update Wireless LAN",
+    "title": "Netbox - Update Wireless LAN",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Auth Cipher",
+          "type": "datatype.string",
+          "description": "* `auto` - Auto\n* `tkip` - TKIP\n* `aes` - AES Valid options are: auto, tkip, aes, .",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79sMn3I7nmQ47dynTIglUUWF",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Auth PSK",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79rTvNkJ6SCmTc8Lt7LtWJkE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Auth Type",
+          "type": "datatype.string",
+          "description": "* `open` - Open\n* `wep` - WEP\n* `wpa-personal` - WPA Personal (PSK)\n* `wpa-enterprise` - WPA Enterprise Valid options are: open, wep, wpa-personal, wpa-enterprise, .",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79pJ6LFaUJ8xH179O3kzxWYs",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Comments",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79sEzLxD3ZvGgUZdINlmQQfv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "{}",
+          "scope": "input",
+          "name": "Input - Custom Fields",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "json",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79rbM7mZKgef8Inyo6tkpdi9",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Description",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79vam5xLd1Sh2Ow2Pi6D5ETR",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Group",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79sM1thIdELshVPQeew9dP1N",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "input",
+          "name": "Input - Scope ID",
+          "type": "datatype.integer",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79rOKMAeexIFygWMwcZb2GoW",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Scope Type",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79sXY2WDkTePlhAPAmlBzuf9",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - SSID",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": true,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79rDiIZ6ed8vOuxEzkeCPNad",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Status",
+          "type": "datatype.string",
+          "description": "* `active` - Active\n* `reserved` - Reserved\n* `disabled` - Disabled\n* `deprecated` - Deprecated Valid options are: active, reserved, disabled, deprecated, .",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79tfdSskwcjU0Jn2Wui4LuZL",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "[]",
+          "scope": "input",
+          "name": "Input - Tags",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "json",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79rR4bmmux070MsOGOFahpoT",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Tenant",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79rqqc1eC8qHh52rYSUcrslb",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - VLAN",
+          "type": "datatype.string",
+          "description": "",
+          "is_required": false,
+          "variable_string_format": "text",
+          "display_on_wizard": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_37G79szCMux1yKWyu2MXOoSN0gm",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output - Status Message",
+          "type": "datatype.string",
+          "description": "The HTTP status message of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G79uTgcgiht2QWdSkphrtKbGQ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "Output - Status Code",
+          "type": "datatype.integer",
+          "description": "The HTTP status code of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": ""
+        },
+        "unique_name": "variable_workflow_37G79pErlJRkGTDxQAR0lSE31sE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output - Error Message",
+          "type": "datatype.string",
+          "description": "The HTTP error message of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G79sf91q0R6H8arTeW8F0I1EA",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "NetBox",
+        "is_atomic": true
+      },
+      "description": "Patch a list of wireless LAN objects.",
+      "display_name": "Netbox - Update Wireless Lan",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "netbox.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_37G79qgfvvimEbNlEd23KoTJ1kO",
+        "name": "Execute Python Script",
+        "title": "Prepare Request Body",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Prepare Request Body",
+          "script": "import json\n\nauth_cipher = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79sMn3I7nmQ47dynTIglUUWF$'\nauth_psk = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79rTvNkJ6SCmTc8Lt7LtWJkE$'\nauth_type = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79pJ6LFaUJ8xH179O3kzxWYs$'\ncomments = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79sEzLxD3ZvGgUZdINlmQQfv$'\ncustom_fields = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79rbM7mZKgef8Inyo6tkpdi9$'\ndescription = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79vam5xLd1Sh2Ow2Pi6D5ETR$'\ngroup = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79sM1thIdELshVPQeew9dP1N$'\nscope_id = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79rOKMAeexIFygWMwcZb2GoW$'\nscope_type = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79sXY2WDkTePlhAPAmlBzuf9$'\nssid = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79rDiIZ6ed8vOuxEzkeCPNad$'\nstatus = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79tfdSskwcjU0Jn2Wui4LuZL$'\ntags = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79rR4bmmux070MsOGOFahpoT$'\ntenant = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79rqqc1eC8qHh52rYSUcrslb$'\nvlan = '$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.input.variable_workflow_37G79szCMux1yKWyu2MXOoSN0gm$'\n\nrequest_body_object = {}\nif auth_cipher != '':\n    request_body_object[\"auth_cipher\"] = auth_cipher\nif auth_psk != '':\n    request_body_object[\"auth_psk\"] = auth_psk\nif auth_type != '':\n    request_body_object[\"auth_type\"] = auth_type\nif comments != '':\n    request_body_object[\"comments\"] = comments\nif custom_fields != '':\n    value = json.loads(custom_fields) if custom_fields != '' else None\n    if value is not None:\n        request_body_object[\"custom_fields\"] = value\nif description != '':\n    request_body_object[\"description\"] = description\nif group != '':\n    request_body_object[\"group\"] = group\nif scope_id != '':\n    value = int(scope_id) if scope_id != '' else None\n    if value is not None:\n        request_body_object[\"scope_id\"] = value\nif scope_type != '':\n    request_body_object[\"scope_type\"] = scope_type\nrequest_body_object[\"ssid\"] = ssid\nif status != '':\n    request_body_object[\"status\"] = status\nif tags != '':\n    value = json.loads(tags) if tags != '' else None\n    if value is not None:\n        request_body_object[\"tags\"] = value\nif tenant != '':\n    request_body_object[\"tenant\"] = tenant\nif vlan != '':\n    request_body_object[\"vlan\"] = vlan\nrequest_body_string = json.dumps([request_body_object])\n",
+          "script_queries": [
+            {
+              "script_query": "request_body_string",
+              "script_query_name": "request_body",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": []
+      },
+      {
+        "unique_name": "definition_activity_37G79tnteImU58ChxDjWgIleZqp",
+        "name": "API Request for Update Wireless LAN",
+        "title": "Update Wireless LAN",
+        "type": "netbox.invoke_api",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Update Wireless Lan",
+          "_method": "PATCH",
+          "_endpoint": "/api/wireless/wireless-lans/",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          },
+          "_body": "$activity.definition_activity_37G79qgfvvimEbNlEd23KoTJ1kO.output.script_queries.request_body$"
+        },
+        "object_type": "definition_activity",
+        "blocks": []
+      },
+      {
+        "unique_name": "definition_activity_37G79rQrS7OfmMMZqsjzZTnJOE0",
+        "name": "Condition Block",
+        "title": "Was the Request Successful?",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "conditions": [],
+          "continue_on_failure": false,
+          "description": "Was The Request Successful?",
+          "display_name": "Was the Request Successful?",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_37G79w2Lvw4XudvIuhRnPkqhLRR",
+            "name": "Condition Branch",
+            "title": "200/Success",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.status_code$",
+                "operator": "eq",
+                "right_operand": 200
+              },
+              "continue_on_failure": false,
+              "display_name": "200/Success",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_37G79pCfig61qvwZ1EPtW8dVZC0",
+                "name": "JSONPath Query",
+                "title": "Extract API Results",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": true,
+                  "display_name": "Extract API Results",
+                  "input_json": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.raw_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$",
+                      "jsonpath_query_name": "Result",
+                      "jsonpath_query_type": "string",
+                      "zdate_type_format": "yyyy-MM-dd'T'HH:mm:ssZ"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": []
+              },
+              {
+                "unique_name": "definition_activity_37G79ttxxGYaVCHzLvuTzsCMw8Z",
+                "name": "Set Variables",
+                "title": "Set Output Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Output Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.variable_workflow_37G79pErlJRkGTDxQAR0lSE31sE$",
+                      "variable_value_new": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.raw_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.workflow_results_code$",
+                      "variable_value_new": "completed-successfully"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity",
+                "blocks": []
+              },
+              {
+                "unique_name": "definition_activity_37G79rxW6t0DJeU1Z0BR9zPUYWm",
+                "name": "Completed",
+                "title": "Completed - Success",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "succeeded",
+                  "continue_on_failure": false,
+                  "display_name": "Completed - Success",
+                  "result_message": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.workflow_results$",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.variable_workflow_37G79pErlJRkGTDxQAR0lSE31sE$",
+                      "variable_value_new": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.raw_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.workflow_results_code$",
+                      "variable_value_new": "completed-successfully"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity",
+                "blocks": []
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_37G79q4ZcLwjpDqwdicAKZhGGaN",
+            "name": "Condition Branch",
+            "title": "Failed",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.status_code$",
+                "operator": "ne",
+                "right_operand": 200
+              },
+              "continue_on_failure": false,
+              "display_name": "Failed",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_37G79uZ3T58l4vjPr62VUIvjt15",
+                "name": "Set Variables",
+                "title": "Set Output Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Output Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.variable_workflow_37G79pErlJRkGTDxQAR0lSE31sE$",
+                      "variable_value_new": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.variable_workflow_37G79sf91q0R6H8arTeW8F0I1EA$",
+                      "variable_value_new": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.error.message$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G79tnteImU58ChxDjWgIleZqp.output.raw_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.workflow_results_code$",
+                      "variable_value_new": "workflow-errored"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity",
+                "blocks": []
+              },
+              {
+                "unique_name": "definition_activity_37G79qOF6qEtpJ22pbUea8KfdSf",
+                "name": "Completed",
+                "title": "Completed - Failed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Completed - Failed",
+                  "result_message": "$workflow.definition_workflow_37G79uUc9JxZ2sufjax9JEvzrYD.output.variable_workflow_37G79sf91q0R6H8arTeW8F0I1EA$",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": []
+  },
+  "categories": {}
+}
+
