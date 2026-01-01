@@ -1,0 +1,506 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5",
+    "name": "NetBox - Create Vlan",
+    "title": "NetBox - Create Vlan",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output - Status Message",
+          "type": "datatype.string",
+          "description": "The HTTP status message of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96EwMiYfpIvoDzerbwdGBma1",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Site",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96ExOivFqB8q7gRyMwaQP7Dr",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Comments",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96DoCSkVDaKEq7cLGG0V66dv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "input",
+          "name": "Input - Qinq Svlan",
+          "type": "datatype.integer",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96IJa2phrNVkkuglTFjoOcdx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Role",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96IeYk4hADVd1IoHXrsWHOAp",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Qinq Role",
+          "type": "datatype.string",
+          "description": "Customer/service VLAN designation (for Q-in-Q/IEEE 802.1ad)\n\n* `svlan` - Service\n* `cvlan` - Customer Valid options are: svlan, cvlan, , \u003cnil\u003e.",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96H7Gzns2Tjaq1GwOtXXE95w",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "[]",
+          "scope": "input",
+          "name": "Input - Tags",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "json"
+        },
+        "unique_name": "variable_workflow_37G96FupJJ8PF4KbbqNYUoAiun5",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output - Error Message",
+          "type": "datatype.string",
+          "description": "The HTTP error message of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96FAuqIiPN0HTsHy2tHcvGWE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Name",
+          "type": "datatype.string",
+          "is_required": true,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96HH8lrpEtfPytrl6ZIJMNpJ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "input",
+          "name": "Input - Vid",
+          "type": "datatype.integer",
+          "description": "Numeric VLAN ID (1-4094)",
+          "is_required": true,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96Do9zBg1zCrC5QqMCSmY7Ju",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Description",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96GBIK5eI9owmP1jJl564BiQ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Tenant",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96JBaYuzHvlSD2n8Y7G1NtDH",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Group",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96FI2fX4hZf1vakmi57KuGaE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Status",
+          "type": "datatype.string",
+          "description": "Operational status of this VLAN\n\n* `active` - Active\n* `reserved` - Reserved\n* `deprecated` - Deprecated Valid options are: active, reserved, deprecated.",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96KAHmwlVYqsorhDtZ0QAewR",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "{}",
+          "scope": "input",
+          "name": "Input - Custom Fields",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "json"
+        },
+        "unique_name": "variable_workflow_37G96KLX1mZnMaCwv5G5JgYgosL",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "Output - Status Code",
+          "type": "datatype.integer",
+          "description": "The HTTP status code of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": ""
+        },
+        "unique_name": "variable_workflow_37G96KcyO2V2yxAzU4yWfcRDwZK",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "NetBox",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "Post a list of VLAN objects.",
+      "display_name": "NetBox - Create Vlan",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "netbox.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_37G96DTlJkYl9CPHQ87NpiAOc9X",
+        "name": "Execute Python Script",
+        "title": "Prepare Request Body",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Prepare Request Body",
+          "script": "import json\n\ncomments = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96DoCSkVDaKEq7cLGG0V66dv$'\ncustom_fields = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96KLX1mZnMaCwv5G5JgYgosL$'\ndescription = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96GBIK5eI9owmP1jJl564BiQ$'\ngroup = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96FI2fX4hZf1vakmi57KuGaE$'\nname = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96HH8lrpEtfPytrl6ZIJMNpJ$'\nqinq_role = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96H7Gzns2Tjaq1GwOtXXE95w$'\nqinq_svlan = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96IJa2phrNVkkuglTFjoOcdx$'\nrole = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96IeYk4hADVd1IoHXrsWHOAp$'\nsite = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96ExOivFqB8q7gRyMwaQP7Dr$'\nstatus = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96KAHmwlVYqsorhDtZ0QAewR$'\ntags = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96FupJJ8PF4KbbqNYUoAiun5$'\ntenant = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96JBaYuzHvlSD2n8Y7G1NtDH$'\nvid = '$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.input.variable_workflow_37G96Do9zBg1zCrC5QqMCSmY7Ju$'\n\nrequest_body_object = {}\nif comments != '':\n    request_body_object[\"comments\"] = comments\nif custom_fields != '':\n    value = json.loads(custom_fields) if custom_fields != '' else None\n    if value is not None:\n        request_body_object[\"custom_fields\"] = value\nif description != '':\n    request_body_object[\"description\"] = description\nif group != '':\n    request_body_object[\"group\"] = group\nrequest_body_object[\"name\"] = name\nif qinq_role != '':\n    request_body_object[\"qinq_role\"] = qinq_role\nif qinq_svlan != '':\n    value = int(qinq_svlan) if qinq_svlan != '' else None\n    if value is not None:\n        request_body_object[\"qinq_svlan\"] = value\nif role != '':\n    request_body_object[\"role\"] = role\nif site != '':\n    request_body_object[\"site\"] = site\nif status != '':\n    request_body_object[\"status\"] = status\nif tags != '':\n    value = json.loads(tags) if tags != '' else None\n    if value is not None:\n        request_body_object[\"tags\"] = value\nif tenant != '':\n    request_body_object[\"tenant\"] = tenant\nif vid != '':\n    request_body_object[\"vid\"] = int(vid) if vid != '' else None\nrequest_body_string = json.dumps(request_body_object)\n",
+          "script_queries": [
+            {
+              "script_query": "request_body_string",
+              "script_query_name": "request_body",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_37G96EpCii4dKI6YOoobvQsKHlj",
+        "name": "API Request for Create VLAN",
+        "title": "Create VLAN",
+        "type": "netbox.invoke_api",
+        "base_type": "activity",
+        "properties": {
+          "_body": "$activity.definition_activity_37G96DTlJkYl9CPHQ87NpiAOc9X.output.script_queries.request_body$",
+          "_endpoint": "/api/ipam/vlans/",
+          "_method": "POST",
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Create Vlan",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_37G96GU0eno8VLXlZ3qxMlasFaA",
+        "name": "Condition Block",
+        "title": "Was the Request Successful?",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "conditions": [],
+          "continue_on_failure": false,
+          "description": "Was The Request Successful?",
+          "display_name": "Was the Request Successful?",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_37G96Ja86GuIt0B3yzonyh31GRO",
+            "name": "Condition Branch",
+            "title": "201/Success",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.status_code$",
+                "operator": "eq",
+                "right_operand": 201
+              },
+              "continue_on_failure": false,
+              "display_name": "201/Success",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_37G96DyLNyT6npCE4kfiYBbJDUi",
+                "name": "JSONPath Query",
+                "title": "Extract API Results",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": true,
+                  "display_name": "Extract API Results",
+                  "input_json": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.raw_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$",
+                      "jsonpath_query_name": "Result",
+                      "jsonpath_query_type": "string",
+                      "zdate_type_format": "yyyy-MM-dd'T'HH:mm:ssZ"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_37G96EPt35K1kCwhUDJSiSsTNCT",
+                "name": "Set Variables",
+                "title": "Set Output Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Output Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.variable_workflow_37G96KcyO2V2yxAzU4yWfcRDwZK$",
+                      "variable_value_new": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.raw_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.workflow_results_code$",
+                      "variable_value_new": "completed-successfully"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_37G96EUkseW3FpFpxIPpk7YKWrQ",
+                "name": "Completed",
+                "title": "Completed - Success",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "succeeded",
+                  "continue_on_failure": false,
+                  "display_name": "Completed - Success",
+                  "result_message": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.workflow_results$",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.variable_workflow_37G96KcyO2V2yxAzU4yWfcRDwZK$",
+                      "variable_value_new": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.raw_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.workflow_results_code$",
+                      "variable_value_new": "completed-successfully"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_37G96FBQxLzknlXwIqoQiOPaQJe",
+            "name": "Condition Branch",
+            "title": "Failed",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.status_code$",
+                "operator": "ne",
+                "right_operand": 201
+              },
+              "continue_on_failure": false,
+              "display_name": "Failed",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_37G96GdntV3byBXdSTl8Au7KziJ",
+                "name": "Set Variables",
+                "title": "Set Output Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Output Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.variable_workflow_37G96KcyO2V2yxAzU4yWfcRDwZK$",
+                      "variable_value_new": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.variable_workflow_37G96FAuqIiPN0HTsHy2tHcvGWE$",
+                      "variable_value_new": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.error.message$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G96EpCii4dKI6YOoobvQsKHlj.output.raw_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.workflow_results_code$",
+                      "variable_value_new": "workflow-errored"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_37G96Jj8FkeG0nlyVXdcGmQa5Vu",
+                "name": "Completed",
+                "title": "Completed - Failed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Completed - Failed",
+                  "result_message": "$workflow.definition_workflow_37G96FUJY0Y0g2XvGtSr578faI5.output.variable_workflow_37G96FAuqIiPN0HTsHy2tHcvGWE$",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
