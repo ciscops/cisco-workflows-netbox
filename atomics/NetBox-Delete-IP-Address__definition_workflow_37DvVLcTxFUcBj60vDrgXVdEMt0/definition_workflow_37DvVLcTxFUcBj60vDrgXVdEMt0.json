@@ -10,16 +10,16 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "input",
-          "name": "Input - ID",
+          "scope": "output",
+          "name": "Output - Error Message",
           "type": "datatype.string",
-          "description": "A unique integer value identifying this IP address.",
-          "is_required": true,
+          "description": "The HTTP error message of the API response.",
+          "is_required": false,
           "display_on_wizard": false,
           "is_invisible": false,
           "variable_string_format": "text"
         },
-        "unique_name": "variable_workflow_37DvVMzteSderwW3PQqgsoG1YFu",
+        "unique_name": "variable_workflow_37DvVPGAJQcrTlOPrr95RtVifzV",
         "object_type": "variable_workflow"
       },
       {
@@ -58,16 +58,16 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "output",
-          "name": "Output - Error Message",
+          "scope": "input",
+          "name": "Input - ID",
           "type": "datatype.string",
-          "description": "The HTTP error message of the API response.",
-          "is_required": false,
+          "description": "A unique integer value identifying this IP address.",
+          "is_required": true,
           "display_on_wizard": false,
           "is_invisible": false,
           "variable_string_format": "text"
         },
-        "unique_name": "variable_workflow_37DvVPGAJQcrTlOPrr95RtVifzV",
+        "unique_name": "variable_workflow_37DvVMzteSderwW3PQqgsoG1YFu",
         "object_type": "variable_workflow"
       }
     ],
