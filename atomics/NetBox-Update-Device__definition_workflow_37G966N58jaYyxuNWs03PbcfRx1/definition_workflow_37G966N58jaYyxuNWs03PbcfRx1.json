@@ -1,0 +1,768 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_37G966N58jaYyxuNWs03PbcfRx1",
+    "name": "NetBox - Update Device",
+    "title": "NetBox - Update Device",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "{}",
+          "scope": "input",
+          "name": "Input - Custom Fields",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "json"
+        },
+        "unique_name": "variable_workflow_37G96CMOBnUlcRZMCSQTBZvoqOc",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Oob IP",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96BfKEbsdO5EBl57dr4BUGkV",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Name",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G968b1mvlL042sRLgla4AIRYS",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Rack",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96B44KnIi5scERXjZt04jfdA",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Role",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96BPYk2l9qah2GEvDroxy4fP",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Comments",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G969fcalWONlA6F9HItbPXmxE",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "output",
+          "name": "Output - Status Code",
+          "type": "datatype.integer",
+          "description": "The HTTP status code of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": ""
+        },
+        "unique_name": "variable_workflow_37G966QDqMJnjoKTEjlzRcltsxz",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Local Context Data",
+          "type": "datatype.string",
+          "description": "Local config context data takes precedence over source contexts in the final rendered config context",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G967XfB5mo0nZr7ch8S90Cmi6",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Location",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G966rlnn5cDBKPQl4WrGxm92A",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output - Error Message",
+          "type": "datatype.string",
+          "description": "The HTTP error message of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96BAHpECVMc3VitdGgXX9NJN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Virtual Chassis",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G969ooD4UGRhORmw3t4GlldmS",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Primary Ip4",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96CVBTJeviXMiPdubzOKwu40",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Site",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G967mSXz1QcJy2yyRIGl9BdgS",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Device Type",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G968NKiFyJvuZy7As39gRaRCq",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "input",
+          "name": "Input - Vc Position",
+          "type": "datatype.integer",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G967C77d5LDbqseZVSKJpAnOI",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "[]",
+          "scope": "input",
+          "name": "Input - Tags",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "json"
+        },
+        "unique_name": "variable_workflow_37G966YtFwsF21oUPh0QLEfwu0X",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Description",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96CEveAATx2K9QRm7kgAIEPV",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Cluster",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96C8ZQyroUHxiCmiIDKlyeyG",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Tenant",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G967CAeQwgsoKmrTklpv6Jvbb",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "input",
+          "name": "Input - Longitude",
+          "type": "datatype.integer",
+          "description": "GPS coordinate in decimal format (xx.yyyyyy)",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96BbcaB2SJlwP7xTN6vXb57z",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Platform",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G9676Wx18iLoxVNeDoHkVrKN2",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "input",
+          "name": "Input - Vc Priority",
+          "type": "datatype.integer",
+          "description": "Virtual chassis master election priority",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G969oYFiMWGXE2DFcdBEeDBEu",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Primary Ip6",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G969Hz8dz7BEzBef9dU9kkyu2",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "input",
+          "name": "Input - Latitude",
+          "type": "datatype.integer",
+          "description": "GPS coordinate in decimal format (xx.yyyyyy)",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96BkFfqo17To5X5vKNUgR20j",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Serial",
+          "type": "datatype.string",
+          "description": "Chassis serial number, assigned by the manufacturer",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G968qYEJWtmnwYzgThriGWlex",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Asset Tag",
+          "type": "datatype.string",
+          "description": "A unique tag used to identify this device",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G965F0xUMDa2n7yHjofaFTgiQ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "input",
+          "name": "Input - Position",
+          "type": "datatype.integer",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G966jXuAGedf86qtdvkP8rmJM",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Status",
+          "type": "datatype.string",
+          "description": "* `offline` - Offline\n* `active` - Active\n* `planned` - Planned\n* `staged` - Staged\n* `failed` - Failed\n* `inventory` - Inventory\n* `decommissioning` - Decommissioning Valid options are: offline, active, planned, staged, failed, inventory, decommissioning.",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96BRXdvk2vGPfyza28oMh85z",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Face",
+          "type": "datatype.string",
+          "description": "* `front` - Front\n* `rear` - Rear Valid options are: front, rear, , \u003cnil\u003e.",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96BEOxmk5OpvnlZINaJOr9mN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Config Template",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96BxqUekBFB9k6LgYvDYDyqx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - Airflow",
+          "type": "datatype.string",
+          "description": "* `front-to-rear` - Front to rear\n* `rear-to-front` - Rear to front\n* `left-to-right` - Left to right\n* `right-to-left` - Right to left\n* `side-to-rear` - Side to rear\n* `rear-to-side` - Rear to side\n* `bottom-to-top` - Bottom to top\n* `top-to-bottom` - Top to bottom\n* `passive` - Passive\n* `mixed` - Mixed Valid options are: front-to-rear, rear-to-front, left-to-right, right-to-left, side-to-rear, rear-to-side, bottom-to-top, top-to-bottom, passive, mixed, , \u003cnil\u003e.",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G969GcYOmlmcW64diU7HizXWh",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output - Status Message",
+          "type": "datatype.string",
+          "description": "The HTTP status message of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96ClaXtugy0noe52pbDwDcIR",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Input - ID",
+          "type": "datatype.string",
+          "description": "A unique integer value identifying this device.",
+          "is_required": true,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G967JyXUGnN3WIP4z1BYPdDpk",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "NetBox",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": false,
+      "description": "Patch a device object.",
+      "display_name": "NetBox - Update Device",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "netbox.endpoint",
+        "specify_on_workflow_start": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_37G96Amvk1QE9fc4vxJqSUtubEV",
+        "name": "Execute Python Script",
+        "title": "Prepare Request Body",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Prepare Request Body",
+          "script": "import json\n\nairflow = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G969GcYOmlmcW64diU7HizXWh$'\nasset_tag = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G965F0xUMDa2n7yHjofaFTgiQ$'\ncluster = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96C8ZQyroUHxiCmiIDKlyeyG$'\ncomments = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G969fcalWONlA6F9HItbPXmxE$'\nconfig_template = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96BxqUekBFB9k6LgYvDYDyqx$'\ncustom_fields = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96CMOBnUlcRZMCSQTBZvoqOc$'\ndescription = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96CEveAATx2K9QRm7kgAIEPV$'\ndevice_type = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G968NKiFyJvuZy7As39gRaRCq$'\nface = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96BEOxmk5OpvnlZINaJOr9mN$'\nlatitude = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96BkFfqo17To5X5vKNUgR20j$'\nlocal_context_data = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G967XfB5mo0nZr7ch8S90Cmi6$'\nlocation = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G966rlnn5cDBKPQl4WrGxm92A$'\nlongitude = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96BbcaB2SJlwP7xTN6vXb57z$'\nname = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G968b1mvlL042sRLgla4AIRYS$'\noob_ip = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96BfKEbsdO5EBl57dr4BUGkV$'\nplatform = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G9676Wx18iLoxVNeDoHkVrKN2$'\nposition = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G966jXuAGedf86qtdvkP8rmJM$'\nprimary_ip4 = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96CVBTJeviXMiPdubzOKwu40$'\nprimary_ip6 = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G969Hz8dz7BEzBef9dU9kkyu2$'\nrack = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96B44KnIi5scERXjZt04jfdA$'\nrole = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96BPYk2l9qah2GEvDroxy4fP$'\nserial = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G968qYEJWtmnwYzgThriGWlex$'\nsite = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G967mSXz1QcJy2yyRIGl9BdgS$'\nstatus = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G96BRXdvk2vGPfyza28oMh85z$'\ntags = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G966YtFwsF21oUPh0QLEfwu0X$'\ntenant = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G967CAeQwgsoKmrTklpv6Jvbb$'\nvc_position = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G967C77d5LDbqseZVSKJpAnOI$'\nvc_priority = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G969oYFiMWGXE2DFcdBEeDBEu$'\nvirtual_chassis = '$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G969ooD4UGRhORmw3t4GlldmS$'\n\nrequest_body_object = {}\nif airflow != '':\n    request_body_object[\"airflow\"] = airflow\nif asset_tag != '':\n    request_body_object[\"asset_tag\"] = asset_tag\nif cluster != '':\n    request_body_object[\"cluster\"] = cluster\nif comments != '':\n    request_body_object[\"comments\"] = comments\nif config_template != '':\n    request_body_object[\"config_template\"] = config_template\nif custom_fields != '':\n    value = json.loads(custom_fields) if custom_fields != '' else None\n    if value is not None:\n        request_body_object[\"custom_fields\"] = value\nif description != '':\n    request_body_object[\"description\"] = description\nif device_type != '':\n    request_body_object[\"device_type\"] = device_type\nif face != '':\n    request_body_object[\"face\"] = face\nif latitude != '0':\n    value = float(latitude) if latitude != '' else None\n    if value is not None:\n        request_body_object[\"latitude\"] = value\nif local_context_data != '':\n    request_body_object[\"local_context_data\"] = local_context_data\nif location != '':\n    request_body_object[\"location\"] = location\nif longitude != '0':\n    value = float(longitude) if longitude != '' else None\n    if value is not None:\n        request_body_object[\"longitude\"] = value\nif name != '':\n    request_body_object[\"name\"] = name\nif oob_ip != '':\n    request_body_object[\"oob_ip\"] = oob_ip\nif platform != '':\n    request_body_object[\"platform\"] = platform\nif position != '0':\n    value = float(position) if position != '' else None\n    if value is not None:\n        request_body_object[\"position\"] = value\nif primary_ip4 != '':\n    request_body_object[\"primary_ip4\"] = primary_ip4\nif primary_ip6 != '':\n    request_body_object[\"primary_ip6\"] = primary_ip6\nif rack != '':\n    request_body_object[\"rack\"] = rack\nif role != '':\n    request_body_object[\"role\"] = role\nif serial != '':\n    request_body_object[\"serial\"] = serial\nif site != '':\n    request_body_object[\"site\"] = site\nif status != '':\n    request_body_object[\"status\"] = status\nif tags != '':\n    value = json.loads(tags) if tags != '' else None\n    if value is not None:\n        request_body_object[\"tags\"] = value\nif tenant != '':\n    request_body_object[\"tenant\"] = tenant\nif vc_position != '':\n    value = int(vc_position) if vc_position != '' else None\n    if value is not None:\n        request_body_object[\"vc_position\"] = value\nif vc_priority != '':\n    value = int(vc_priority) if vc_priority != '' else None\n    if value is not None:\n        request_body_object[\"vc_priority\"] = value\nif virtual_chassis != '':\n    request_body_object[\"virtual_chassis\"] = virtual_chassis\nrequest_body_string = json.dumps(request_body_object)\n",
+          "script_queries": [
+            {
+              "script_query": "request_body_string",
+              "script_query_name": "request_body",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou",
+        "name": "API Request for Update Device",
+        "title": "Update Device",
+        "type": "netbox.invoke_api",
+        "base_type": "activity",
+        "properties": {
+          "_body": "$activity.definition_activity_37G96Amvk1QE9fc4vxJqSUtubEV.output.script_queries.request_body$",
+          "_endpoint": "/api/dcim/devices/$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.input.variable_workflow_37G967JyXUGnN3WIP4z1BYPdDpk$/",
+          "_method": "PATCH",
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Update Device",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_37G96BiW1icMWtj14hFQ9F7ZPhB",
+        "name": "Condition Block",
+        "title": "Was the Request Successful?",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "conditions": [],
+          "continue_on_failure": false,
+          "description": "Was The Request Successful?",
+          "display_name": "Was the Request Successful?",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_37G966KZ4vAPagliAMio1sMxujs",
+            "name": "Condition Branch",
+            "title": "200/Success",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.status_code$",
+                "operator": "eq",
+                "right_operand": 200
+              },
+              "continue_on_failure": false,
+              "display_name": "200/Success",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_37G966QXRjad7EfopODANdJ1zSL",
+                "name": "JSONPath Query",
+                "title": "Extract API Results",
+                "type": "corejava.jsonpathquery",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": true,
+                  "display_name": "Extract API Results",
+                  "input_json": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.raw_body$",
+                  "jsonpath_queries": [
+                    {
+                      "jsonpath_query": "$",
+                      "jsonpath_query_name": "Result",
+                      "jsonpath_query_type": "string",
+                      "zdate_type_format": "yyyy-MM-dd'T'HH:mm:ssZ"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_37G968q5BtupZTx3NcQfUYCKvFH",
+                "name": "Set Variables",
+                "title": "Set Output Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Output Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.variable_workflow_37G966QDqMJnjoKTEjlzRcltsxz$",
+                      "variable_value_new": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.raw_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.workflow_results_code$",
+                      "variable_value_new": "completed-successfully"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_37G965C6N2qla6rHZ0t5SWNAgr4",
+                "name": "Completed",
+                "title": "Completed - Success",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "succeeded",
+                  "continue_on_failure": false,
+                  "display_name": "Completed - Success",
+                  "result_message": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.workflow_results$",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.variable_workflow_37G966QDqMJnjoKTEjlzRcltsxz$",
+                      "variable_value_new": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.raw_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.workflow_results_code$",
+                      "variable_value_new": "completed-successfully"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_37G965sWGVOugtsy1FLe9KOsXap",
+            "name": "Condition Branch",
+            "title": "Failed",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.status_code$",
+                "operator": "ne",
+                "right_operand": 200
+              },
+              "continue_on_failure": false,
+              "display_name": "Failed",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_37G9693KtU6woabecIDDEM7AAj2",
+                "name": "Set Variables",
+                "title": "Set Output Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Output Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.variable_workflow_37G966QDqMJnjoKTEjlzRcltsxz$",
+                      "variable_value_new": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.status_code$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.variable_workflow_37G96BAHpECVMc3VitdGgXX9NJN$",
+                      "variable_value_new": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.error.message$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.workflow_results$",
+                      "variable_value_new": "$activity.definition_activity_37G96ACRBI3fPlC6QgC7ej2pGou.output.raw_body$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.workflow_results_code$",
+                      "variable_value_new": "workflow-errored"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_37G965sUUMLCpRrqRrYaY5lTkLj",
+                "name": "Completed",
+                "title": "Completed - Failed",
+                "type": "logic.completed",
+                "base_type": "activity",
+                "properties": {
+                  "completion_type": "failed-completed",
+                  "continue_on_failure": false,
+                  "display_name": "Completed - Failed",
+                  "result_message": "$workflow.definition_workflow_37G966N58jaYyxuNWs03PbcfRx1.output.variable_workflow_37G96BAHpECVMc3VitdGgXX9NJN$",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
