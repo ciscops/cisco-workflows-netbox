@@ -708,14 +708,29 @@ func buildOperationDisplayName(operationId, path, method string) string {
 		action = "Create"
 		resourceName = singularize(resourceName)
 	case "PUT":
-		action = "Update"
-		resourceName = singularize(resourceName)
+		if hasParam {
+			action = "Update"
+			resourceName = singularize(resourceName)
+		} else {
+			action = "Bulk Update"
+			// Keep plural
+		}
 	case "PATCH":
-		action = "Update"
-		resourceName = singularize(resourceName)
+		if hasParam {
+			action = "Update"
+			resourceName = singularize(resourceName)
+		} else {
+			action = "Bulk Update"
+			// Keep plural
+		}
 	case "DELETE":
-		action = "Delete"
-		resourceName = singularize(resourceName)
+		if hasParam {
+			action = "Delete"
+			resourceName = singularize(resourceName)
+		} else {
+			action = "Bulk Delete"
+			// Keep plural
+		}
 	default:
 		return HumanReadableName(operationId)
 	}

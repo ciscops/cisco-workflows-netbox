@@ -72,12 +72,12 @@ workflows:
   - endpoint: /dcim/device-types/{id}
     methods: [PATCH]
   - endpoint: /dcim/devices
-    methods: [GET,POST]
+    methods: [GET,POST,DELETE]
     query_params:
       - site
       - has_primary_ip
   - endpoint: /dcim/devices/{id}
-    methods: [PATCH]
+    methods: [PATCH,DELETE]
   - endpoint: /dcim/front-port-templates
     methods: [GET]
   - endpoint: /dcim/front-ports
@@ -85,12 +85,12 @@ workflows:
   - endpoint: /dcim/interface-templates
     methods: [GET]
   - endpoint: /dcim/interfaces
-    methods: [GET,POST]
+    methods: [GET,POST,DELETE]
     query_params:
       - device_id
       - tag
   - endpoint: /dcim/interfaces/{id}
-    methods: [PATCH]
+    methods: [PATCH,DELETE]
   - endpoint: /dcim/inventory-item-roles
     methods: [GET]
   - endpoint: /dcim/inventory-item-templates
@@ -154,9 +154,9 @@ workflows:
   - endpoint: /dcim/site-groups
     methods: [GET]
   - endpoint: /dcim/sites
-    methods: [GET,POST]
+    methods: [GET,POST,DELETE]
   - endpoint: /dcim/sites/{id}
-    methods: [PATCH]
+    methods: [PATCH,DELETE]
   - endpoint: /dcim/virtual-chassis
     methods: [GET]
   - endpoint: /dcim/virtual-device-contexts
@@ -229,7 +229,7 @@ workflows:
       - vlan_id
       - vrf
   - endpoint: /ipam/prefixes/{id}
-    methods: [PATCH]
+    methods: [PATCH,DELETE]
   - endpoint: /ipam/rirs
     methods: [GET]
   - endpoint: /ipam/roles
@@ -247,9 +247,9 @@ workflows:
   - endpoint: /ipam/vlan-translation-rules
     methods: [GET]
   - endpoint: /ipam/vlans
-    methods: [GET,POST]
+    methods: [GET,POST,DELETE]
   - endpoint: /ipam/vlans/{id}
-    methods: [PATCH]
+    methods: [PATCH,DELETE]
   - endpoint: /ipam/vrfs
     methods: [GET,POST]
   - endpoint: /ipam/vrfs/{id}

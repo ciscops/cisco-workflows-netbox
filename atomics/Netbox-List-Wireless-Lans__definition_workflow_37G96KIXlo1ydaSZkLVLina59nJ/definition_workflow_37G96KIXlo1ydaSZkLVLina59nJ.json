@@ -1,8 +1,8 @@
 {
   "workflow": {
     "unique_name": "definition_workflow_37G96KIXlo1ydaSZkLVLina59nJ",
-    "name": "Netbox - List Wireless Lans",
-    "title": "Netbox - List Wireless Lans",
+    "name": "NetBox - List Wireless Lans",
+    "title": "NetBox - List Wireless Lans",
     "type": "generic.workflow",
     "base_type": "workflow",
     "variables": [
@@ -11,45 +11,14 @@
         "properties": {
           "value": "",
           "scope": "input",
-          "name": "Query - Tenant",
-          "type": "datatype.string",
-          "description": "Tenant (slug)",
-          "is_required": false,
-          "display_on_wizard": true,
-          "is_invisible": false,
-          "variable_string_format": "text"
-        },
-        "unique_name": "variable_workflow_37G96HbEuNbCgEGzGYNxgOxScvb",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "Query - Description",
+          "name": "Query - ID",
           "type": "datatype.string",
           "is_required": false,
           "display_on_wizard": true,
           "is_invisible": false,
           "variable_string_format": "text"
         },
-        "unique_name": "variable_workflow_37G96DkHmhdCQ7NxGUtNIYEuNpU",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "Query - Status",
-          "type": "datatype.string",
-          "is_required": false,
-          "display_on_wizard": true,
-          "is_invisible": false,
-          "variable_string_format": "text"
-        },
-        "unique_name": "variable_workflow_37G96EKg8aqMQ48dQ7bxglgGv5K",
+        "unique_name": "variable_workflow_37G96D6aocNgisFmPbKDz3UdseD",
         "object_type": "variable_workflow"
       },
       {
@@ -73,37 +42,6 @@
         "properties": {
           "value": "",
           "scope": "output",
-          "name": "Output - Status Message",
-          "type": "datatype.string",
-          "description": "The HTTP status message of the API response.",
-          "is_required": false,
-          "display_on_wizard": false,
-          "is_invisible": false,
-          "variable_string_format": "text"
-        },
-        "unique_name": "variable_workflow_37G96G9T1ZjXxbHVcFJbsYid5ql",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "Output - Count",
-          "type": "datatype.string",
-          "is_required": false,
-          "display_on_wizard": false,
-          "is_invisible": false,
-          "variable_string_format": "text"
-        },
-        "unique_name": "variable_workflow_37G96H0Qjj50dnvClR97A3KPKLZ",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
           "name": "Output - Results",
           "type": "datatype.string",
           "is_required": false,
@@ -112,6 +50,36 @@
           "variable_string_format": "text"
         },
         "unique_name": "variable_workflow_37G96IehSx5aNJR5wYZBMOdJVfs",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output - Previous",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96HHlRXoZmJegMPoiHSroqdQ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output - Next",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96FXyuhcJsS2bw9PHVALcggC",
         "object_type": "variable_workflow"
       },
       {
@@ -135,29 +103,15 @@
         "properties": {
           "value": "",
           "scope": "input",
-          "name": "Query - ID",
+          "name": "Query - Tenant",
           "type": "datatype.string",
+          "description": "Tenant (slug)",
           "is_required": false,
           "display_on_wizard": true,
           "is_invisible": false,
           "variable_string_format": "text"
         },
-        "unique_name": "variable_workflow_37G96D6aocNgisFmPbKDz3UdseD",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "output",
-          "name": "Output - Previous",
-          "type": "datatype.string",
-          "is_required": false,
-          "display_on_wizard": false,
-          "is_invisible": false,
-          "variable_string_format": "text"
-        },
-        "unique_name": "variable_workflow_37G96HHlRXoZmJegMPoiHSroqdQ",
+        "unique_name": "variable_workflow_37G96HbEuNbCgEGzGYNxgOxScvb",
         "object_type": "variable_workflow"
       },
       {
@@ -197,14 +151,60 @@
         "properties": {
           "value": "",
           "scope": "output",
-          "name": "Output - Next",
+          "name": "Output - Status Message",
+          "type": "datatype.string",
+          "description": "The HTTP status message of the API response.",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96G9T1ZjXxbHVcFJbsYid5ql",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output - Count",
           "type": "datatype.string",
           "is_required": false,
           "display_on_wizard": false,
           "is_invisible": false,
           "variable_string_format": "text"
         },
-        "unique_name": "variable_workflow_37G96FXyuhcJsS2bw9PHVALcggC",
+        "unique_name": "variable_workflow_37G96H0Qjj50dnvClR97A3KPKLZ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Query - Status",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96EKg8aqMQ48dQ7bxglgGv5K",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Query - Description",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": true,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_37G96DkHmhdCQ7NxGUtNIYEuNpU",
         "object_type": "variable_workflow"
       }
     ],
@@ -215,7 +215,7 @@
       },
       "delete_workflow_instance": false,
       "description": "Get a list of wireless LAN objects.",
-      "display_name": "Netbox - List Wireless Lans",
+      "display_name": "NetBox - List Wireless Lans",
       "runtime_user": {
         "target_default": true
       },
